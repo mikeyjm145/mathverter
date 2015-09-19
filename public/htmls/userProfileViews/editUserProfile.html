@@ -1,0 +1,37 @@
+<form ng-submit="submitChanges()">
+    <section id="profileView" class="center border">
+        <section id="profileTitle" class="title displayBlock center">Edit Profile</section>
+        <section class="profileInformation">
+            <span class="detailsText">
+                <span class="bold">Username: </span>
+                <input type="text" placeholder="Your new username" ng-model="user.username" ng-value="user.username"/>
+            </span> <br/>
+
+            <span class="detailsText">
+                <span class="bold">About: </span>
+                <br/>
+                <span class="padding-20">
+                    <textarea
+                       id="profileTextArea"
+                       class="userInput"
+                       rows="4"
+                       cols="50"
+                       placeholder="Your highly valued opinion of yourself goes here!"
+                       ng-model="user.about"
+                       ng-value="user.about">
+                    </textarea>
+                </span>
+            </span> <br/>
+
+            <span class="detailsText">
+                <span class="bold">Email: </span>
+                <input type="email" placeholder="Your email" ng-model="user.email" ng-value="user.email"/>
+            </span> <br/>
+        </section>
+        <section id="buttonSection" class="padding-20">
+            <button class="alignCenter" type="submit">submit</button>
+            <button class="alignCenter" type="button"ng-click="toViewState()">cancel</button>
+        </section>
+        <span class="errorText">{{errorMessage}}</span>
+    </section>
+</form>

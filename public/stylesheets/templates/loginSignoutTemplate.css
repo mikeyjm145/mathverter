@@ -1,0 +1,41 @@
+#loginBox, #signupBox {
+	background-color: rgba(0, 0, 0, 0.4); 
+	border-color: whitesmoke;
+    text-align: center;
+    width: 390px;
+}
+
+#loginFrame {
+	padding-top: 15px;
+    width: 93%;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+.inputAlign {
+    float: right;
+    display: inline-block;
+    margin-top: 0;
+    width: 180px;
+    height: 30px;
+}
+
+.labelAlign {
+    text-align: left;
+	color: white;
+    font-size: 20px;
+}
+
+.xlarge {
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.large {
+    font-size: large;
+    font-weight: bold;
+}
+
+#buttonSection {
+    margin-bottom: 10px;
+}

@@ -1,11 +1,119 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>AirPad</title>
+	
+	<!-- for FF, Chrome, Opera -->
+	<link rel="icon" type="image/png" href="/images/AirPadSmaller.png" sizes="16x16">
+	<link rel="icon" type="image/png" href="/images/AirPadSmaller.png" sizes="32x32">
+
+	<!-- for IE -->
+	<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+	<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
+	
+	<script>
+		window.history.forward(1);
+	</script>
+
+    <!-- load bootstrap CSS -->
+	<link rel="stylesheet" href="/bootstrap/font-awesome-4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/angular/summernote.css">
+    <!-- http://fontawesome.io/icons/ for icons -->
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/templates/viewnote-Template.css">
+    <link rel="stylesheet" href="/templates/viewnotes-Template.css">
+	<link rel="stylesheet" href="/templates/addnote-Template.css">
+	<link rel="stylesheet" href="/templates/home-Template.css">
+	<link rel="stylesheet" href="/templates/userprofile-Template.css">
+    <link rel="stylesheet" href="/templates/loginSignoutTemplate.css">
+
+    <!-- JS (load angular, ui-router, and our application scripts) -->
+    <script type="text/javascript" src="/jquery/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/angular/components/angular-1-3-9.js"></script>
+	<script type="text/javascript" src="/angular/components/angular-ui-router.js"></script>
+
+    <!-- Angular Scripts -->
+    <script type="text/javascript" src="/summernote/summernote.min.js"></script>
+    <script type="text/javascript" src="/summernote/angular-summernote.js"></script>
+    <script type="text/javascript" src="/angular/code/module.js"></script>
+    <script type="text/javascript" src="/angular/code/filter.js"></script>
+    <script type="text/javascript" src="/angular/code/factory.js"></script>
+    <script type="text/javascript" src="/angular/code/controller.js"></script>
+    <script type="text/javascript" src="/angular/code/config.js"></script>
+	<script type="text/javascript" src="/angular/code/values.js"></script>
+	
+    <!-- My Scripts -->
+    <script type="text/javascript" src="/simpleFunctions.js"></script>
+	
+</head>
+
+<body ng-app="AirPad" ng-controller="NotePad">
+	<span ng-init="GoToHome()"></span>
+    <section id="wrapper">
+        <!-- Sidebar -->
+        <section id="sidebar-wrapper">
+		<section id="logo-section" class="easeTransition menuTitleText center">
+                    <a href="" ui-sref="home"><section id="logo" class="center"></section></a>
+                </section>
+            <ul class="sidebar-nav">
+				<hr>
+                <li class="menuItemTitleText easeTransition">
+					<span class="adjustLineHeight">
+						<a href="" class="bold" ui-sref="login">
+							<span class="name" ng-show="LoggedIn() === false">
+								<i class="fa fa-sign-in"></i>&nbsp;&nbsp;Log In
+							</span>
+							<span class="name" ng-show="LoggedIn() === true">
+								<i class="fa fa-sign-out"></i>&nbsp;&nbsp;Log Out
+							</span>
+						</a>
+					</span>
+                </li>
+				<li class="menuItemTitleText easeTransition">
+					<span class="adjustLineHeight">
+						<a href="" ng-show="LoggedIn() === true" class="bold" ng-click="GoToProfile()">
+							<span class="name">
+								<i class="fa fa-user"></i>&nbsp;&nbsp;{{SetName()}}
+							</span>
+						</a>
+					</span>
+                </li>
+				<hr>
+				<li href="" class="menuItemTitleText easeTransition">
+					<a href="" ui-sref="home"><i class="fa fa-home" ></i> Home</a>
+				</li>
+				<li class="menuItemTitleText easeTransition">
+					<a href="" ui-sref="addnote"><i class="fa fa-plus-circle" ></i> Add Note</a>
+				</li>
+				<li class="menuItemTitleText easeTransition">
+					<a href="" ui-sref="viewnotes"><i class="fa fa-file-text"></i> View Notes</a>
+				</li>
+				<li class="menuItemTitleText easeTransition">
+					<a href="" ui-sref="viewfavnotes"><i class="fa fa-star"></i> Favored Notes</a>
+				</li>
+				<li class="menuItemTitleText easeTransition">
+					<a href="" ui-sref="viewdeletednotes"><i class="fa fa-trash"></i> Recycle Bin</a>
+				</li>
+            </ul>
+        </section>
+        <!-- /#sidebar-wrapper -->
+		
+        <!-- Page Content -->
+        <section id="page-content-wrapper">
+            <section class="container-fluid">
+				<section ui-view>
+					Content Area
+				</section>
+            </section>
+        </section>
+        <!-- /#page-content-wrapper -->
+
+    </section>
+
+
+</body>
 </html>

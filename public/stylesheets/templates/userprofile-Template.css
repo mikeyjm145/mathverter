@@ -1,0 +1,71 @@
+.statsBox {
+	width: 160px;
+	height: 150px;
+	display: inline-block;
+	background-color: rgba(245,245,245,.2);
+	border: solid whitesmoke medium;
+	text-align: center;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-moz-box-shadow: 5px 5px 5px #222;
+	-webkit-box-shadow: 5px 5px 5px #222;
+	box-shadow: 5px 5px 5px #222;
+	margin: 10px;
+}
+
+.statsBox:hover {
+	background-color: rgba(0,0,0,.5);
+	border: solid whitesmoke medium;
+}
+
+.statsBox:hover a {
+	color: whitesmoke;
+}
+
+.statistic {
+	font-size: 100px;
+	font-weight: bolder;
+	line-height: 100px;
+}
+
+.statTitle {
+	font-size: x-large;
+	font-weight: bold;
+}
+
+#header-profile {
+	padding-left: 10px;
+	font-weight: bolder;
+	font-size: 50px;
+}
+
+.infoTitle {
+	font-size: 25px;
+	font-weight: bolder;
+	text-transform: uppercase;
+}
+
+.infoContent {
+	font-size: 25px;
+	font-weight: bold;
+}
+
+#infoContentAbout {
+	width: 90%;
+    padding: 10px;
+    font-size: x-large;
+    line-height: 20px;
+    border: solid whitesmoke thick;
+	background-color: rgba(0,0,0,.5);
+	text-align: left;
+}
+
+#statsContainer {
+	width: 90%;
+	text-align: center;
+}
+
+#infoContainer {
+	width: 90%;
+}

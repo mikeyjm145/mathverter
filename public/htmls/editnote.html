@@ -1,0 +1,23 @@
+<section>
+	<span ng-init="IsLoggedIn()"></span>
+	<span ng-init="TestNoteID()">
+	<section id="add-note-section" ng-show="noInvalidIDError === true" class="center alignText">
+		<section class="full-length-section-left-align">
+			<h2 id="header-add-note" class="whitesmokeText">Edit a Note...</h2>
+			<label ng-hide="noError" class="error">Please enter a value into both fields.</label>
+		</section>
+		<input class="noteTitle-addnote invisibleField whitesmokeText" placeholder="Title" type="text" name="title" ng-model="editform.title"/>
+		<span class="noteBody whitesmokeText center"  placeholder="TEXT" summernote airMode readonly="true" ng-model="editform.body"></span>
+		<section class="center buttonSection">
+			<button type="button" ng-click="UpdateNote()">Update Note</button>&nbsp;&nbsp;
+			<button type="button" ng-click="ClearEditValues()">Clear All</button>&nbsp;&nbsp;
+			<button type="button" ng-click="GoToViewNotes()">Cancel</button>
+		</section>
+	</section>
+	<section ng-show="noInvalidIDError !== true" class="innerContentSection">
+		<h2 id="header-view-note" class="whitesmokeText">Invalid Note ID!</h2>
+		<h2 class="textTitle whitesmokeText">
+			Please navigate to "View Notes" and select a note from there.
+		</h2>
+	</section>
+</section>

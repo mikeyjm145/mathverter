@@ -1,0 +1,57 @@
+<form ng-submit="SignUp()">
+    <section id="signupBox" class="center border">
+        <h6 id="header-add-note" class="whitesmokeText">Sign Up</h6>
+        <section id="loginFrame" class="center">
+            <label class="bold smallerMinorTitle labelAlign">First Name:</label>
+            <input type="text"
+                   placeholder="First Name"
+                   class="inputAlign"
+                   ng-model="newUserInfo.firstName"
+            />
+            <br/>
+            <label class="bold smallerMinorTitle labelAlign">Last Name:</label>
+            <input type="text"
+                   placeholder="Last Name"
+                   class="inputAlign"
+                   ng-model="newUserInfo.lastName"
+            />
+            <br/>
+            <label class="bold smallerMinorTitle labelAlign">Username:</label>
+            <input type="text"
+                   placeholder="Username"
+                   maxlength="15"
+                   class="inputAlign"
+                   ng-model="newUserInfo.username"
+            />
+            <br/>
+            <label class="bold smallerMinorTitle labelAlign">Email:</label>
+            <input type="email"
+                   placeholder="Email"
+                   class="inputAlign"
+                   ng-model="newUserInfo.email"
+            />
+            <br/>
+            <label class="bold smallerMinorTitle labelAlign">Password:</label>
+            <input type="password"
+                   placeholder="Password"
+                   maxlength="15"
+                   class="inputAlign"
+                   ng-model="newUserInfo.password"
+            />
+            <br/>
+            <label class="bold smallerMinorTitle labelAlign">Password Again:</label>
+            <input type="password"
+                   placeholder="Password Again"
+                   maxlength="15"
+                   class="inputAlign"
+                   ng-model="newUserInfo.passwordAgain"
+            />
+        </section>
+        <section id="buttonSection">
+            <button type="submit">Sign Up</button>
+            <span class="xlarge whitesmokeText">|</span>
+            <a ng-click="toLoginState()" class="whitesmokeText large">Log In with Account</a>
+        </section>
+        <span class="error">{{errorMessage}}</span>
+    </section>
+</form>

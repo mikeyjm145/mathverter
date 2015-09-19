@@ -1,0 +1,39 @@
+<section id="items" class="content-section center border">
+	<span ng-init="IsLoggedIn()"></span>
+	<section id="itemSection" class="center" ng-show="listOfNotes.notes.length > 0">
+		<section id="full-length-section-left-align">
+			<h2 id="header-view-notes" class="whitesmokeText">Deleted Notes</h2>
+		</section>
+		<section class="item-width" ng-repeat="note in listOfNotes.notes">
+			<section class="item alignText border" data-title="{{note.title}}">
+				<section class="noteTitle-viewnotes"><a href="" ng-click="GoToNote(note)">{{note.title}}</a></section>
+				<a href="" ng-click="GoToNote(note)"><i class="fa fa-file-text fa-4x"></i></a>
+				<br/>
+				<section class="options">
+					<a href="" ng-click="RestoreNote(note)">
+						<i class="fa fa-undo fa-lg"></i>
+					</a>&nbsp;&nbsp;
+					<a href="" ng-click="DeleteNoteForever(note)">
+						<i class="fa fa-trash fa-lg"></i>
+					</a>
+				</section>
+			</section>
+		</section>
+		<section id="backToTop" class="buttonSection transition" ng-click="scrollTo('itemSection')">
+			<a href="">
+				<i class="fa fa-arrow-up fa-lg"></i>
+				<br/>
+				Back to top
+			</a>
+		</section>
+	</section>
+	<section id="itemSection" class="center" ng-hide="listOfNotes.notes.length > 0">
+		<h2 id="header-view-notes" class="whitesmokeText">No Notes Here!</h2>
+		<span class="burlywoodText noNotesError">
+			Click
+			<a href="" ng-click="GoToViewNotes()">
+				<i class="fa fa-dribbble fa-spin"></i>
+			</a> 
+			to delete a note.</span>
+	</section>
+</section>

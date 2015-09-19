@@ -1,0 +1,14 @@
+<section id="add-note-section" class="content-section center border">
+	<span ng-init="IsLoggedIn()"></span>
+	<section>
+		<h2 id="header-add-note" class="whitesmokeText">Add a Note...</h2>
+		<label ng-hide="noError" class="error">Please enter a value into both fields.</label>
+	</section>
+	<input ng-model="form.title" class="noteTitle-addnote invisibleField whitesmokeText" placeholder="Title" type="text" name="title"/>
+	<span ng-model="form.body" class="noteBody whitesmokeText center"  placeholder="TEXT" summernote airMode></span>
+	<section class="center buttonSection">
+		<button type="button" ng-click="AddNote()">Add Note</button>&nbsp;&nbsp;
+		<button type="button" ng-click="ClearValues()">Clear All</button>&nbsp;&nbsp;
+		<button type="button" ng-click="GoToViewNotes()">Cancel</button>
+	</section>
+</section>

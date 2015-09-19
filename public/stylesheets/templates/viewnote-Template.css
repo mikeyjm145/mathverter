@@ -1,0 +1,58 @@
+.textTitle {
+    font-size: 30px;
+    font-weight: bolder;
+    text-transform: uppercase;
+}
+
+.textContent {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#header-view-note {
+	padding-left: 10px;
+	font-weight: bolder;
+	font-size: 60px;
+}
+
+#note-details-area {
+    font-size: large;
+}
+
+.inlineText {
+    display: inline;
+}
+
+.black-text {
+    color: black;
+}
+
+.padding-top-10 {
+    padding-top: 10px;
+}
+
+#note-details-area, .padding-left-20 {
+    padding-left: 20px;
+}
+
+.noteText {
+    font-size: x-large;
+    font-stretch: extra-expanded;
+	background-color: rgba(0,0,0,.5);
+	color: whitesmoke;
+}
+
+.lineStyle {
+    margin-right: 10px;
+	border-color: whitesmoke;
+}
+
+.noteBody-ViewNote {
+	width: 90%;
+    padding: 10px;
+    font-size: x-large;
+    line-height: 20px;
+    border: solid whitesmoke thick;
+	background-color: rgba(0,0,0,.5);
+	text-align: left;
+}

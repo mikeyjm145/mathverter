@@ -1,0 +1,32 @@
+<form>
+    <section id="loginBox" class="center border">
+        <p class="title">{{text}}</p>
+		<h6 id="header-add-note" class="whitesmokeText">{{text}}</h6>
+        <section ng-show="IsLoggedOut() === true" id="loginFrame" class="center">
+            <label class="bold smallerMinorTitle labelAlign">Username:</label>
+            <input align="left"
+                   type="text"
+                   placeholder="Username"
+                   class="inputAlign"
+                   name="username"
+                   ng-model="incomingUser.username"
+                    />
+            <br/>
+            <label class="bold smallerMinorTitle labelAlign">Password:</label>
+            <input align="left"
+                   type="password"
+                   placeholder="Password"
+                   class="inputAlign"
+                   name="password"
+                   ng-model="incomingUser.password"
+                    />
+        </section>
+        <section id="buttonSection">
+            <button ng-show="IsLoggedOut() === true" class="alignCenter" type="submit" ng-click="Login()">Log In</button>
+            <button ng-show="IsLoggedOut() === false" class="alignCenter" type="button" ng-click="Logout()">Log Out</button>
+            <span ng-show="IsLoggedOut() === true" class="whitesmokeText"> <span class="xlarge">|</span> </span>
+            <button ng-show="IsLoggedOut() === true" type="button" ng-click="toSignupState()">Create an Account</button>
+        </section>
+        <span class="error">{{errorMessage}}</span>
+    </section>
+</form>

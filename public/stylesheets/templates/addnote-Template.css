@@ -1,0 +1,65 @@
+#header-view-notes {
+	padding-left: 10px;
+	font-weight: bolder;
+	font-size: 60px;
+}
+
+#full-length-section {
+	text-align: left;
+	width: 100%;
+}
+
+#header-add-note {
+	padding-left: 10px;
+	font-weight: bolder;
+	font-size: 50px;
+}
+
+#add-note-section {
+	height: 100%;
+	overflow: auto;
+}
+
+.full-length-section-left-align {
+	text-align: left;
+	width: 100%;
+}
+
+.invisibleField {
+    background-color: transparent;
+    border: none;
+}
+
+.noteTitle-addnote {
+    font-family: Verdana;
+    width: 90%;
+    font-size: xx-large;
+    line-height: 40px;
+    border: solid whitesmoke thick;
+	background-color: rgba(0,0,0,.5);
+}
+
+.noteBody {
+    width: 90%;
+    padding: 10px;
+    height: 50%;
+    font-size: x-large;
+    line-height: 20px;
+    border: solid whitesmoke thick;
+	background-color: rgba(0,0,0,.5);
+	text-align: left;
+}
+
+.noteTitle-addnote::-webkit-input-placeholder,
+.noteTitle-addnote::-moz-placeholder,
+.noteTitle-addnote:-ms-input-placeholder,
+.noteTitle-addnote:-ms-input-placeholder {
+	color: rgba(0,5,143,.5);
+	text-transform: capitalize;
+}
+
+.buttonSection {
+    width: 90%;
+    border: solid whitesmoke thick;
+    text-align: center;
+}

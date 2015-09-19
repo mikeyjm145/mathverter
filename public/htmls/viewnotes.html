@@ -1,0 +1,56 @@
+<section id="items" class="content-section center border">
+	<span ng-init="IsLoggedIn()"></span>
+	<section id="itemSection" class="center" ng-show="listOfNotes.notes.length > 0">
+		<section>
+			<h2 id="header-viewNotes" class="whitesmokeText">{{currUser}}'s Notes</h2>
+			<section>
+				<span class="noteTitle-viewnotes whitesmokeText">Order by:</span>&nbsp;&nbsp;
+				<select 
+					name="order"
+					class="dropdown-viewnotes"
+					ng-model="selectedValue"
+					ng-change="changedValue(selectedValue)"
+					data-ng-options="sortOption as sortOption.name for sortOption in sortOptions">
+					<option value="">Select an option</option>
+				</select>
+			</section>
+		</section>
+		<section class="item-width" ng-repeat="note in listOfNotes.notes | orderBy:predicate:reverse">
+			<section class="item alignText border" data-title="{{note.title}}">
+					<section class="noteTitle-viewnotes">
+						<a href="" ng-click="GoToNote(note)">{{note.title}}</a>
+					</section>
+					<a href="" ng-click="GoToNote(note)"><i class="fa fa-file-text fa-4x"></i></a>
+					<br/>
+					<section class="options" ng-click="">
+						<a href="" ng-click="ShareNote(note)">
+							<i class="fa fa-share-alt fa-lg"></i>
+						</a>&nbsp;&nbsp;
+						<span>
+							<a ng-show="!note.favored" href="" ng-click="AddNoteToFavorites(note)">
+								<i class="fa fa-star-o fa-lg"></i>
+							</a>
+							<i ng-show="note.favored" class="fa fa-star fa-lg"></i>
+						</span>&nbsp;&nbsp;
+						<a href="" ng-click="GoToEditNote(note)">
+							<i class="fa fa-pencil-square-o fa-lg"></i>
+						</a>&nbsp;&nbsp;
+						<a href="" ng-click="DeleteNote(note)">
+							<i class="fa fa-trash fa-lg"></i>
+						</a>
+					</section>
+			</section>
+		</section>
+		<section id="backToTop" class="buttonSection transition" ng-click="scrollTo('itemSection')">
+			<a href="">
+				<i class="fa fa-arrow-up fa-lg"></i>
+				<br/>
+				Back to top
+			</a>
+		</section>
+	</section>
+	<section id="itemSection" class="center" ng-hide="listOfNotes.notes.length > 0">
+		<h2 id="header-view-notes" class="whitesmokeText">No notes here!</h2>
+		<a href="" ng-click="GoToAddNote()"><span class="noNotesError">Click here to add a note.</span></a>
+	</section>
+</section>

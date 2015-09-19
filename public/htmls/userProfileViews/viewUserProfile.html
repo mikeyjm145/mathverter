@@ -1,0 +1,31 @@
+<section id="profileView" class="center border">
+    <section id="profileTitle" class="title displayBlock center">Profile</section>
+    <section id="col-1" class="profileInformation">
+        <span class="detailsText">
+            <span class="bold">Username: </span>{{user.username}}
+        </span> <br/>
+
+        <span class="detailsText">
+            <span class="bold">About: </span>
+            <br/>
+            <span class="padding-20">{{user.about}}</span>
+        </span> <br/><br/>
+
+        <span class="detailsText">
+            <span class="bold">Date Registered: </span>{{user.dateSignUp}}
+        </span> <br/>
+
+        <span class="detailsText">
+            <span class="bold">Amount of Reviews: </span>{{user.amountOfReviews}}
+        </span> <br/>
+
+        <span class="detailsText">
+            <span class="bold">Amount of Edits: </span>{{user.amountOfEdits}}
+        </span> <br/>
+    </section>
+    <section id="buttonSection" ng-show="isLoggedIn()">
+        <button class="alignCenter" type="button" ng-click="toEditState()">Edit User Info</button>
+    </section>
+    <span class="errorText">{{errorMessage}}</span>
+
+</section>

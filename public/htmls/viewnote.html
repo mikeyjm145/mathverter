@@ -1,0 +1,33 @@
+<section class="content-section center border">
+	<span ng-init="IsLoggedIn()"></span>
+    <span ng-init="GetNote()"></span>
+	<section ng-show="currNote !== null" class="innerContentSection">
+        <section>
+            <h2 id="header-view-note" class="whitesmokeText">{{currNote.title}}</h2>
+            <section id="note-details-area">
+                <!--<span class="textTitle whitesmokeText">Creator:</span> <span class="blanchedalmondText textContent">{{currNote.creator}}</span><br/>-->
+                <span class="textTitle whitesmokeText">Date of Creation:</span> <span class="blanchedalmondText textContent">{{currNote.creationDate}}</span><br/>
+                <span class="textTitle whitesmokeText">Recent Edit Date:</span> <span class="blanchedalmondText textContent">{{currNote.recentEditDate}}</span><br/>
+            </section>
+        </section>
+		<hr class="border lineStyle">
+        <section class="padding-top-10">
+            <h2 class="inlineText textTitle whitesmokeText">
+                Note Title:
+                <span class="blanchedalmondText textContent"> {{currNote.title}}</span>
+            </h2>
+            <h2 class="textTitle whitesmokeText">
+                Note Content:
+            </h2>
+            <p class="noteText">
+				<section id="noteContent" class="noteBody-ViewNote whitesmokeText center" ng-init="InjectContent('noteContent', currNote)"></section>
+            </p>
+        </section>
+    </section>
+    <section ng-show="currNote === null" class="innerContentSection">
+		<h2 id="header-view-note" class="whitesmokeText">Invalid Note ID!</h2>
+		<h2 class="textTitle whitesmokeText">
+			Please navigate to "View Notes" and select a note from there.
+		</h2>
+    </section>
+</section>

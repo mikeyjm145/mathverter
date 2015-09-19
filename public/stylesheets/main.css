@@ -1,0 +1,289 @@
+/*!
+ * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+/*!
+ * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+/* Toggle Styles */
+
+body {
+	background: url("./images/paper.jpg") no-repeat;
+	background-origin: content-box;
+	background-size: cover;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 90%;
+	min-width: 720px;
+    height: 100%;
+    margin: 0 auto;
+    background-color: whitesmoke;
+    vertical-align: text-top;
+}
+
+header {
+    width: 100%;
+}
+
+a:link, a:visited, a:hover, a:active {
+	text-decoration: none;
+	color: whitesmoke;
+}
+
+button, input, a:link, a:visited, a:hover, a:active, .cursor {
+	/*cursor: url(images/jet.cur), auto;*/
+    cursor: pointer;
+	/*http://www.cursor.cc/*/
+}
+
+button {
+    -moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+    border: solid whitesmoke thin;
+	background-color: rgba(0, 0, 0, .5);
+    color: whitesmoke;
+    font-weight: bold;
+    font-size: large;
+}
+
+#wrapper, .sidebar-nav li:hover,
+.sidebar-nav li a:hover, a:hover,
+.easeTransition {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.transition {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-left: 250px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 0;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: hidden;
+    background: #000;
+	top: 0;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 100%;
+}
+
+#page-content-wrapper {
+    width: 100%;
+	height: 100%;
+    position: absolute;
+    padding: 5px;
+	background-color: rgba(0, 0, 0, .3);
+	border-radius: 16px 16px 16px 16px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -280px;
+}
+
+#full-length-section {
+	width: 100%;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    position: absolute;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    line-height: 40px;
+}
+
+.sidebar-nav li,
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+	color: whitesmoke;
+}
+.sidebar-nav li:hover {
+	background-color: wheat;
+	padding-left: 30px;
+}
+
+.sidebar-nav li:hover a {
+    text-decoration: none;
+    color: black;
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+	text-decoration: none;
+}
+
+@media(min-width:268px) {
+    #wrapper {
+        padding-left: 250px;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 250px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0px;
+    }
+
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 20px;
+    }
+}
+
+#logo-section {
+	width: 150px;
+}
+
+#logo {
+    background: url("images/AirPadSmaller.png") no-repeat center;
+    background-size: contain;
+	background-position: center center;
+    padding: 150px auto;
+	margin-top: 20px;
+    width: 125px;
+    height: 125px;
+    display: block;
+}
+
+#full-length-section-left-align {
+	text-align: left;
+	width: 100%;
+}
+
+.content-section {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-color: whitesmoke !important;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.padding-bottom {
+    height: 100px;
+    padding-bottom: 40px;
+}
+
+.center {
+    margin: 0 auto;
+}
+
+.border {
+    border: solid medium black;
+}
+
+.menuTitleText {
+    font-size: large;
+    font-weight: bolder;
+}
+
+.name {
+	font-size: x-large;
+    font-weight: bold;
+	padding-left: 0;
+}
+
+.menuItemTitleText {
+    font-size: x-large;
+    font-weight: bold;
+	padding-left: 20px;
+}
+
+.alignText {
+    text-align: center;
+}
+
+.alignTextLeft {
+	text-align: left;
+}
+
+.alignTextRight {
+	text-align: right;
+}
+
+.burlywood-background {
+    background-color: burlywood;
+}
+
+.blanchedalmond-background {
+    background-color: blanchedalmond;
+}
+
+.whitesmoke-background {
+    background-color: whitesmoke;
+}
+
+.whitesmokeText {
+	color: whitesmoke;
+}
+
+.burlywoodText {
+	color: burlywood;
+}
+
+.blanchedalmondText {
+	color: blanchedalmond;
+}
+
+.overflow-y-hidden {
+    overflow-y: hidden;
+}
+
+.box-shadow {
+	box-shadow: 5px 5px 2px grey;
+}
+
+.noNotesError {
+	font-size: 30px;
+}
+
+.error {
+	font-weight: bolder;
+	color: yellow;
+	font-size: 20px;
+}
+
+.adjustLineHeight {
+	line-height: auto;
+}

@@ -1,0 +1,51 @@
+<span ng-init="IsLoggedIn()"></span>
+<span ng-init="TestUserID()"></span>
+<section class="content-section center border">
+	<section ng-show="noInvalidIDError === true">
+		<section>
+			<h2 id="header-profile" class="whitesmokeText">{{user.name}}'s Profile</h2>
+		</section>
+		<section id="infoContainer" class="center alignTextLeft">
+			<span class="infoTitle whitesmokeText">Name:</span> <span class="infoContent blanchedalmondText">{{user.name}}</span><br/>
+			<span class="infoTitle whitesmokeText">Username:</span> <span class="infoContent blanchedalmondText">{{user.username}}</span><br/>
+			<span class="infoTitle whitesmokeText">Registered Email:</span> <span class="infoContent blanchedalmondText">{{user.email}}</span><br/>
+			<span class="infoTitle whitesmokeText">Sign Up On:</span> <span class="infoContent blanchedalmondText">{{user.signupDate}}</span><br/>
+			<span class="infoTitle whitesmokeText">About:</span><br/>
+			<section id="infoContentAbout" class="infoContent blanchedalmondText center">{{user.about}}</section>
+		</section>
+		<hr class="border lineStyle">
+		<section id="statsContainer" class="center">
+			<span class="infoTitle whitesmokeText">{{user.name}}'s Notes</span><br/>
+			<section class="statsBox whitesmokeText cursor center" ng-click="GoToViewNotes()">
+				<a href="">
+					<span class="statistic">{{user.amountOfNotes}}</span><br/>
+					<span class="statTitle">Notes</span>
+				</a>
+			</section>
+			<section class="statsBox whitesmokeText cursor center" ng-click="GoToViewFavoriteNotes()">
+				<a href="">
+					<span class="statistic">{{user.amountFavorited}}</span><br/>
+					<span class="statTitle">Favorited</span>
+				</a>
+			</section>
+			<section class="statsBox whitesmokeText cursor center" ng-click="GoToViewDeletedNotes()">
+				<a href="">
+					<span class="statistic">{{user.amountDeleted}}</span><br/>
+					<span class="statTitle">Deleted</span>
+				</a>
+			</section>
+		</section>
+	</section>
+	<section ng-show="noInvalidIDError === false" class="innerContentSection">
+		<h2 id="header-view-note" class="whitesmokeText">Invalid User ID!</h2>
+		<h2 class="textTitle whitesmokeText">
+			Please navigate to "View Notes" and select a note from there.
+		</h2>
+    </section>
+</section>
+<!--
+http://bootstrapzero.com/bootstrap-template/nice-admin
+http://bootstraptaste.com/theme/niceadmin/index.html
+http://bootstrapzero.com/bootstrap-template/insight
+http://webthemez.com/preview/?insight-free-bootstrap-html5-admin-template/#
+-->

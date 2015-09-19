@@ -1,0 +1,111 @@
+#items {
+	width: 90%;
+	overflow: hidden;
+	overflow-y: auto;
+}
+
+#itemSection {
+	width: 100%;
+	text-align: center;
+}
+
+#header-viewNotes {
+	padding-left: 10px;
+	font-weight: bolder;
+	font-size: 50px;
+}
+
+#backToTop {
+	width: 100%;
+	border-radius: 6px 6px 6px 6px;
+	cursor: pointer;
+}
+
+#backToTop:hover {
+	background-color: grey;
+}
+
+.item-width {
+	display: inline-block;
+	width: 170px;
+	/*cursor: pointer;*/
+}
+
+.item {
+	width: 160px;
+	height: 145px;
+	margin: 10px 10px;
+	border: solid whitesmoke medium;
+	text-decoration: none;
+	border-radius: 6px 6px 6px 6px;
+	box-shadow: 5px 5px 2px grey;
+}
+
+.item:hover {
+	background-color: grey;
+}
+
+.options {
+	margin-top: 15px;
+	visibility: hidden;
+	z-index: 1;
+}
+
+.item:hover .options{
+	visibility: visible;
+	color: whitesmoke;
+	text-decoration: none;
+}
+
+.item[data-title]:hover:after {
+	content: attr(data-title);
+	font-size: large;
+	font-weight: bolder;
+	padding: 4px 8px;
+	position: absolute;
+	color: black;
+	left: auto;
+	top: auto;
+	margin-left: -80px;
+	margin-top: -170px;
+	white-space: nowrap;
+	background-color: whitesmoke;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-moz-box-shadow: 0px 0px 4px #222;
+	-webkit-box-shadow: 0px 0px 4px #222;
+	box-shadow: 0px 0px 4px #222;
+	-webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.noteTitle-viewnotes {
+	font-size: x-large;
+    font-weight: bolder;
+	white-space: nowrap;
+	overflow: hidden;
+    text-overflow:ellipsis;
+	height: 40px;
+}
+
+.dropdown-viewnotes {
+	font-size: x-large;
+	line-height: 35px;
+}
+
+/*
+#showAllTags {
+	visibility:hidden;
+    text-overflow:ellipsis;
+	height: 5px;
+}
+
+.item:hover  #showAllTags {
+	visibility:visible;
+    text-overflow:none;
+	height: 30px;
+}
+*/
