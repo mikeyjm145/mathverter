@@ -22,6 +22,64 @@ var notepad = function ($scope, $state, currUser) {
 
 var home = function ($scope, $state, $stateParams, currUser) {
 	$scope.currUser = currUser;
+	var lastIndex = -1;
+	$scope.status = {open: false};
+	$scope.startingLanguage = "Select a Language";
+	$scope.isLanguageSelected = [
+		{id: 0, name: 'Java', border: false},
+		{id: 1, name: 'Python', border: false},
+		{id: 2, name: 'MathML', border: false},
+		{id: 3, name: 'Regular Math', border: false},
+		{id: 4, name: 'C#', border: false},
+		{id: 5, name: 'C++', border: false},
+		{id: 6, name: 'C', border: false},
+		{id: 7, name: 'LaTex', border: false},
+		{id: 8, name: 'BrainFuck', border: false}
+	];
+	
+	$scope.arrowLeftDirection = function(open) {
+		console.log(open);
+		if (open) {
+			return 'fa-arrow-down';
+		}
+		return 'fa-arrow-left';
+	}
+	
+	$scope.arrowRightDirection = function(open) {
+		if (open) {
+			return 'fa-arrow-down';
+		}
+		return 'fa-arrow-right';
+	}
+	
+	$scope.borderOrNoBorder = function(languageID) {
+		if (languageID < 0 && languageID > 8) {
+			return '';
+		}
+		
+		if ($scope.isLanguageSelected[languageID].border) {
+			return 'languageSelectBorder';
+		}
+		
+		return '';
+	}
+	
+	$scope.setSelectedStartingLanguage = function(languageID) {
+		if (languageID < 0 && languageID > 8) {
+			$scope.isLanguageSelected[lastIndex].border = false;
+			console.log($scope.isLanguageSelected[lastIndex].border);
+		}
+		
+		if (lastIndex >= 0 && lastIndex <= 8) {
+			$scope.isLanguageSelected[lastIndex].border = false;
+			console.log($scope.isLanguageSelected[lastIndex].border);
+		}
+		
+		$scope.startingLanguage = $scope.isLanguageSelected[languageID].name;
+		$scope.isLanguageSelected[languageID].border = true;
+		console.log($scope.isLanguageSelected[languageID].border);
+		lastIndex = $scope.isLanguageSelected[languageID].id;
+	};
 	
 	$scope.IsLoggedIn = function () {
 		if (currUser.id === null) {

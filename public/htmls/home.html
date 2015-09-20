@@ -1,12 +1,119 @@
     <section class="containDivs">
-		<span ng-init="IsLoggedIn()"></span>
+		<!--<span ng-init="IsLoggedIn()"></span>-->
 		<!-- Intro Section -->
 		<section id="intro" class="content-section center border">
 			<div class="whitesmokeText">
-				<h1 id="header-home"><b>Welcome, {{currUser.name}}</b></h1>
+				<h1 id="header-home"><b>Welcome, </b>{{currUser.id}}</h1>
+			</div>
+			<div layout="column" class="whitesmokeText">
+				<div layout="row">
+					<div flex>
+					(For home page only)
+					</div>
+				</div>
+				<accordion close-others="oneAtATime" class="burlywood-background" ng-click="status.open = !status.open">
+					<accordion-group heading="Select a Language" class="burlywood-background" panel-class="panel-alert">
+						<accordion-heading>
+						<h1 id="header-home"><b><i class="fa fa-arrow-down"></i>Select Language<i class="fa fa-arrow-down"></i></b></h1>
+						</accordion-heading>
+						<section>
+							<div layout="row">
+								<div flex class="test" ng-class="borderOrNoBorder(0)" ng-click="setSelectedStartingLanguage(0)">
+									<a href="" ui-sref="home">
+										<span id="logoForJava" class="center"></span>
+										</br><span class="blackText">Java</span>
+									</a>
+								</div>
+								<div flex class="test" ng-class="borderOrNoBorder(1)" ng-click="setSelectedStartingLanguage(1)">
+									<a href="" ui-sref="home">
+										<span id="logoForPython" class="center"></span>
+										</br><span class="blackText">Python</span>
+									</a>
+								</div>
+								<div flex class="test" ng-class="borderOrNoBorder(2)" ng-click="setSelectedStartingLanguage(2)">
+									<a href="" ui-sref="home">
+										<span id="logoForMathML" class="center"></span>
+										</br><span class="blackText">MathML</span>
+									</a>
+								</div>
+								<div flex class="test" ng-class="borderOrNoBorder(3)" ng-click="setSelectedStartingLanguage(3)">
+									<a href="" ui-sref="home">
+										<span id="logoForRegMath" class="center"></span>
+										</br><span class="blackText">Regular Math</span>
+									</a>
+								</div>
+							</div>
+							<div layout="row">
+								<div flex class="test" ng-class="borderOrNoBorder(4)" ng-click="setSelectedStartingLanguage(4)">
+									<a href="" ui-sref="home">
+										<span id="logoForCSharp" class="center"></span>
+										</br><span class="blackText">C#</span>
+									</a>
+								</div>
+								<div flex class="test" ng-class="borderOrNoBorder(5)" ng-click="setSelectedStartingLanguage(5)">
+									<a href="" ui-sref="home">
+										<span id="logoForCPlusPlus" class="center"></span>
+										</br><span class="blackText">C++</span>
+									</a>
+								</div>
+								<div flex class="test" ng-class="borderOrNoBorder(6)" ng-click="setSelectedStartingLanguage(6)">
+									<a href="" ui-sref="home">
+										<span id="logoForC" class="center"></span>
+										</br><span class="blackText">C</span>
+									</a>
+								</div>
+								<div flex class="test" ng-class="borderOrNoBorder(7)" ng-click="setSelectedStartingLanguage(7)">
+								<a href="" ui-sref="home"><span id="logoForLaTex" class="center"></span>
+								</br><span class="blackText">Latex</span></a>
+								</div>
+							</div>
+							<div layout="row">
+								<div flex class="test" ng-class="borderOrNoBorder(8)" ng-click="setSelectedStartingLanguage(8)">
+								<a href="" ui-sref="home"><span id="logoForBrainFuck" class="center"></span>
+								</br><span class="blackText">BrainFuck</span></a>
+								</div>
+								<div flex>
+								</div>
+								<div flex>
+								</div>
+								<div flex>
+								</div>
+							</div>
+						</section>
+					</accordion-group>
+				</accordion>
+				<div layout="row">
+					<div flex>
+					<h1 id="header-home"><b>Language Selected: </b>{{startingLanguage}}</h1>
+					</div>
+				</div>
+				<div layout="row">
+					<div flex>
+					(For conversion page only)
+					</div>
+				</div>
+				<div layout="row">
+					<div flex>
+					============================</br>
+					Input</br>
+					<span class="noteBody whitesmokeText center"  placeholder="TEXT" summernote airMode readonly="true" ng-model="editform.body"></span>
+					</div>
+				</div>
+				<div layout="row">
+					<div flex hide-sm>
+					<md-button class="md-primary md-hue-1">Convert</md-button>
+					</div>
+				</div>
+				<div layout="row">
+					<div flex>
+					============================</br>
+					Output</br>
+					(Some Input Field)
+					</div>
+				</div>
 			</div>
 			<br />
-			<div class="whitesmokeText">
+			<!--<div class="whitesmokeText">
 				<h2><b>Add Note</b></h2>
 				<h3>Quickly create, edit, and save notes</h3>
 			</div>
@@ -24,6 +131,6 @@
 			<div class="whitesmokeText">
 				<h2><b>Recycle Bin</b></h2>
 				<h3>Recover deleted notes</h3>
-			</div>
+			</div>-->
 		</section>
 	</section>

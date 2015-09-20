@@ -5,12 +5,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var fileSystem = require('fs');
+var sha1 = require('sha1');
 var mongoose = require('mongoose');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var notes = require('./routes/notes');
 
+//https://www.npmjs.com/package/sha1
 //https://thinkster.io/mean-stack-tutorial/
+//http://www.sha1-online.com/ Already installed via npm
 //mongodb://admin:password@ds049631.mongolab.com:49631/mathverter
 mongoose.connect('mongodb://admin:password@ds061158.mongolab.com:61158/airpad', function (err) {
     if(err) {

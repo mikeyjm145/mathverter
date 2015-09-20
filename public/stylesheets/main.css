@@ -174,6 +174,20 @@ button {
 	width: 150px;
 }
 
+.test {
+	cursor: pointer;
+}
+
+.test:hover {
+	background-color: blanchedalmond;
+	color: black;
+}
+
+.languageSelectBorder {
+    border: solid medium black;
+	background-color: white;
+}
+
 #logo {
     background: url("images/AirPadSmaller.png") no-repeat center;
     background-size: contain;
@@ -182,6 +196,96 @@ button {
 	margin-top: 20px;
     width: 125px;
     height: 125px;
+    display: block;
+}
+
+#logoForJava {
+    background: url("images/Java_logo.png") no-repeat center;
+    background-size: contain;
+	background-position: center center;
+	margin-top: 5px;
+    width: 75px;
+    height: 75px;
+    display: block;
+}
+
+#logoForMathML {
+    background: url("images/mathml.png") no-repeat center;
+    background-size: contain;
+	background-position: center center;
+	margin-top: 5px;
+    width: 75px;
+    height: 75px;
+    display: block;
+}
+
+#logoForPython {
+    background: url("images/python.png") no-repeat center;
+    background-size: contain;
+	background-position: center center;
+	margin-top: 5px;
+    width: 75px;
+    height: 75px;
+    display: block;
+}
+
+#logoForRegMath {
+    background: url("images/I_Love_Math.jpg") no-repeat center;
+    background-size: contain;
+	background-position: center center;
+	margin-top: 5px;
+    width: 75px;
+    height: 75px;
+    display: block;
+}
+
+#logoForBrainFuck {
+    background: url("images/brainfuck.png") no-repeat center;
+    background-size: contain;
+	background-position: center center;
+	margin-top: 5px;
+    width: 75px;
+    height: 75px;
+    display: block;
+}
+
+#logoForCSharp {
+    background: url("images/csharp.png") no-repeat center;
+    background-size: contain;
+	background-position: center center;
+	margin-top: 5px;
+    width: 75px;
+    height: 75px;
+    display: block;
+}
+
+#logoForCPlusPlus {
+    background: url("images/C++.png") no-repeat center;
+    background-size: contain;
+	background-position: center center;
+	margin-top: 5px;
+    width: 75px;
+    height: 75px;
+    display: block;
+}
+
+#logoForC {
+    background: url("images/c.png") no-repeat center;
+    background-size: contain;
+	background-position: center center;
+	margin-top: 5px;
+    width: 75px;
+    height: 75px;
+    display: block;
+}
+
+#logoForLaTex {
+    background: url("images/latex.png") no-repeat center;
+    background-size: contain;
+	background-position: center center;
+	margin-top: 5px;
+    width: 75px;
+    height: 75px;
     display: block;
 }
 
@@ -264,6 +368,10 @@ button {
 
 .blanchedalmondText {
 	color: blanchedalmond;
+}
+
+.blackText {
+	color: black;
 }
 
 .overflow-y-hidden {
