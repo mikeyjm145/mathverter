@@ -13,8 +13,8 @@ var notes = require('./routes/notes');
 //https://www.npmjs.com/package/sha1
 //https://thinkster.io/mean-stack-tutorial/
 //http://www.sha1-online.com/ Already installed via npm
-//mongodb://admin:password@ds049631.mongolab.com:49631/mathverter
-mongoose.connect('mongodb://admin:password@ds061158.mongolab.com:61158/airpad', function (err) {
+//mongodb://admin:password@ds061158.mongolab.com:61158/airpad
+mongoose.connect('mongodb://admin:password@ds049631.mongolab.com:49631/mathverter', function (err) {
     if(err) {
         console.log('connection error', err);
     } else {
