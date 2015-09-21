@@ -13,7 +13,7 @@
 /* Toggle Styles */
 
 body {
-	background: url("./images/paper.jpg") no-repeat;
+	background: url("./images/paper.jpg") repeat;
 	background-origin: content-box;
 	background-size: cover;
     padding-top: 20px;
@@ -176,16 +176,25 @@ button {
 
 .test {
 	cursor: pointer;
+	margin: 2px;
+	width: 50px !important;
 }
 
-.test:hover {
+/**.test a .center:hover,  .test a span:hover {
 	background-color: blanchedalmond;
+	box-shadow:4px 4px 4px 4px #333;
+}**/
+
+.test:hover {
+	background-color: white;
 	color: black;
+	box-shadow:4px 4px 4px 4px #333;
 }
 
 .languageSelectBorder {
-    border: solid medium black;
-	background-color: white;
+    /**border: solid medium black;**/
+	background-color: blanchedalmond;
+	box-shadow:4px 4px 4px 4px #333;
 }
 
 #logo {
@@ -347,7 +356,7 @@ button {
 }
 
 .burlywood-background {
-    background-color: burlywood;
+    background-color: burlywood !important;
 }
 
 .blanchedalmond-background {

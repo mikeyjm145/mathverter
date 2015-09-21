@@ -22,20 +22,190 @@ var notepad = function ($scope, $state, currUser) {
 
 var home = function ($scope, $state, $stateParams, currUser) {
 	$scope.currUser = currUser;
-	var lastIndex = -1;
-	$scope.status = {open: false};
+	$scope.conversion = {
+		conversionFrom: "",
+		input: "",
+		conversionTo: "",
+		result: ""
+	}
+	
+	$scope.statusStarting = {open: true};
+	var lastIndexStart = -1;
 	$scope.startingLanguage = "Select a Language";
-	$scope.isLanguageSelected = [
-		{id: 0, name: 'Java', border: false},
-		{id: 1, name: 'Python', border: false},
-		{id: 2, name: 'MathML', border: false},
-		{id: 3, name: 'Regular Math', border: false},
-		{id: 4, name: 'C#', border: false},
-		{id: 5, name: 'C++', border: false},
-		{id: 6, name: 'C', border: false},
-		{id: 7, name: 'LaTex', border: false},
-		{id: 8, name: 'BrainFuck', border: false}
+	$scope.startingLanguageLogo = "";
+	var isStartingLanguageSelected = [
+		{id: 0, name: 'Java', imageID: 'logoForJava', border: false},
+		{id: 1, name: 'Python', imageID: 'logoForPython', border: false},
+		{id: 2, name: 'MathML', imageID: 'logoForMathML', border: false},
+		{id: 3, name: 'Regular Math', imageID: 'logoForRegMath', border: false},
+		{id: 4, name: 'C#', imageID: 'logoForCSharp', border: false},
+		{id: 5, name: 'C++', imageID: 'logoForCPlusPlus', border: false},
+		{id: 6, name: 'C', imageID: 'logoForC', border: false},
+		{id: 7, name: 'LaTex', imageID: 'logoForLaTex', border: false},
+		{id: 8, name: 'BrainFuck', imageID: 'logoForBrainFuck', border: false}
 	];
+	
+	var startingLangaugeSelected = function() {
+		if ($scope.startingLanguageLogo === "") {
+			return false;
+		}
+		
+		return true;
+	}
+	
+	var setStartStatus = function() {
+		$scope.statusStarting.open = !($scope.statusStarting.open);
+	}
+	
+	var borderOrNoBorderStart = function(languageID) {
+		if (languageID < 0 && languageID > 8) {
+			return '';
+		}
+		
+		if (isStartingLanguageSelected[languageID].border) {
+			return 'languageSelectBorder';
+		}
+		
+		return '';
+	}
+	
+	var setSelectedStartingLanguage = function(languageID) {
+		if (languageID < 0 && languageID > 8) {
+			isStartingLanguageSelected[lastIndexStart].border = false;
+			$scope.startingLanguageLogo = "";
+		}
+		
+		if (lastIndexStart >= 0 && lastIndexStart <= 8) {
+			isStartingLanguageSelected[lastIndexStart].border = false;
+		}
+		
+		$scope.startingLanguage = isStartingLanguageSelected[languageID].name;
+		isStartingLanguageSelected[languageID].border = true;
+		$scope.startingLanguageLogo = isStartingLanguageSelected[languageID].imageID;
+		lastIndexStart = isStartingLanguageSelected[languageID].id;
+		$scope.conversion.conversionFrom = $scope.startingLanguage;
+		$scope.statusStarting.open = false;
+	};
+	
+	$scope.statusConversion = {open: true};
+	var lastIndexConversion = -1;
+	$scope.conversionLanguage = "Select a Language";
+	$scope.conversionLanguageLogo = "";
+	var isConversionLanguageSelected = [
+		{id: 0, name: 'Java', imageID: 'logoForJava', border: false},
+		{id: 1, name: 'Python', imageID: 'logoForPython', border: false},
+		{id: 2, name: 'MathML', imageID: 'logoForMathML', border: false},
+		{id: 3, name: 'Regular Math', imageID: 'logoForRegMath', border: false},
+		{id: 4, name: 'C#', imageID: 'logoForCSharp', border: false},
+		{id: 5, name: 'C++', imageID: 'logoForCPlusPlus', border: false},
+		{id: 6, name: 'C', imageID: 'logoForC', border: false},
+		{id: 7, name: 'LaTex', imageID: 'logoForLaTex', border: false},
+		{id: 8, name: 'BrainFuck', imageID: 'logoForBrainFuck', border: false}
+	];
+	
+	var setConversionStatus = function() {
+		$scope.statusConversion.open = !($scope.statusConversion.open);
+	}
+	
+	var conversionLangaugeSelected = function() {
+		if ($scope.conversionLanguageLogo === "") {
+			return false;
+		}
+		
+		return true;
+	}
+	
+	var borderOrNoBorderConversion = function(languageID) {
+		if (languageID < 0 && languageID > 8) {
+			return '';
+		}
+		
+		if (isConversionLanguageSelected[languageID].border) {
+			return 'languageSelectBorder';
+		}
+		
+		return '';
+	}
+	
+	var setSelectedConversionLanguage = function(languageID) {
+		if (languageID < 0 && languageID > 8) {
+			isConversionLanguageSelected[lastIndexConversion].border = false;
+			$scope.conversionLanguageLogo = "";
+		}
+		
+		if (lastIndexConversion >= 0 && lastIndexConversion <= 8) {
+			isConversionLanguageSelected[lastIndexConversion].border = false;
+		}
+		
+		$scope.conversionLanguage = isConversionLanguageSelected[languageID].name;
+		isConversionLanguageSelected[languageID].border = true;
+		$scope.conversionLanguageLogo = isConversionLanguageSelected[languageID].imageID;
+		lastIndexConversion = isConversionLanguageSelected[languageID].id;
+		$scope.conversion.conversionTo = $scope.conversionLanguage;
+		$scope.statusConversion.open = false;
+	};
+	
+	$scope.clearAll = function() {
+		if (lastIndexStart >= 0 &&  lastIndexStart <= 8) {
+			isStartingLanguageSelected[lastIndexStart].border = false;
+			lastIndexStart = -1;
+		}
+		
+		if (lastIndexConversion >= 0 &&  lastIndexConversion <= 8) {
+			isConversionLanguageSelected[lastIndexConversion].border = false;
+			lastIndexConversion= -1;
+		}
+		
+		$scope.startingLanguageLogo = "";
+		$scope.conversionLanguageLogo = "";
+		$scope.startingLanguage = "Select a Language";
+		$scope.conversionLanguage = "Select a Language";
+		$scope.conversion.conversionFrom = "";
+		$scope.conversion.conversionTo = "";
+		$scope.conversion.input = "";
+		$scope.conversion.result = "";
+		$scope.statusStarting.open = true;
+	}
+	
+	$scope.langaugeSelected = function(symbol) {
+		if (symbol === 's') {
+			return startingLangaugeSelected();
+		} else if (symbol === 'c') {
+			return conversionLangaugeSelected();
+		}
+	}
+	
+	$scope.setStatus = function(symbol) {
+		if (symbol === 's') {
+			setStartStatus();
+		} else if (symbol === 'c') {
+			setConversionStatus();
+		}
+	}
+	
+	$scope.getStatus = function(symbol) {
+		if (symbol === 's') {
+			return $scope.statusStarting.open;
+		} else if (symbol === 'c') {
+			return $scope.statusConversion.open;
+		}
+	}
+	
+	$scope.borderOrNoBorder = function(symbol, languageID) {
+		if (symbol === 's') {
+			return borderOrNoBorderStart(languageID);
+		} else if (symbol === 'c') {
+			return borderOrNoBorderConversion(languageID);
+		}
+	}
+	
+	$scope.setSelectedLanguage = function(symbol, languageID) {
+		if (symbol === 's') {
+			setSelectedStartingLanguage(languageID);
+		} else if (symbol === 'c') {
+			setSelectedConversionLanguage(languageID);
+		}
+	}
 	
 	$scope.arrowLeftDirection = function(open) {
 		console.log(open);
@@ -51,35 +221,6 @@ var home = function ($scope, $state, $stateParams, currUser) {
 		}
 		return 'fa-arrow-right';
 	}
-	
-	$scope.borderOrNoBorder = function(languageID) {
-		if (languageID < 0 && languageID > 8) {
-			return '';
-		}
-		
-		if ($scope.isLanguageSelected[languageID].border) {
-			return 'languageSelectBorder';
-		}
-		
-		return '';
-	}
-	
-	$scope.setSelectedStartingLanguage = function(languageID) {
-		if (languageID < 0 && languageID > 8) {
-			$scope.isLanguageSelected[lastIndex].border = false;
-			console.log($scope.isLanguageSelected[lastIndex].border);
-		}
-		
-		if (lastIndex >= 0 && lastIndex <= 8) {
-			$scope.isLanguageSelected[lastIndex].border = false;
-			console.log($scope.isLanguageSelected[lastIndex].border);
-		}
-		
-		$scope.startingLanguage = $scope.isLanguageSelected[languageID].name;
-		$scope.isLanguageSelected[languageID].border = true;
-		console.log($scope.isLanguageSelected[languageID].border);
-		lastIndex = $scope.isLanguageSelected[languageID].id;
-	};
 	
 	$scope.IsLoggedIn = function () {
 		if (currUser.id === null) {

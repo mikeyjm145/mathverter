@@ -10,93 +10,96 @@
 					<div flex>
 					(For home page only)
 					</div>
-				</div>
-				<accordion close-others="oneAtATime" class="burlywood-background" ng-click="status.open = !status.open">
-					<accordion-group heading="Select a Language" class="burlywood-background" panel-class="panel-alert">
+				</div>				
+				<accordion close-others="oneAtATime" class="burlywood-background">
+					<accordion-group is-open="getStatus('s')" heading="Select a Language" panel-class="panel-alert" layout-align="center center">
 						<accordion-heading>
-						<h1 id="header-home"><b><i class="fa fa-arrow-down"></i>Select Language<i class="fa fa-arrow-down"></i></b></h1>
+							<md-toolbar class="burlywood-background" ng-click="setStatus('s')">
+								<div class="md-toolbar-tools" layout-align="center center">
+									<h2 class="md-flex"><b><i class="fa" ng-class="arrowRightDirection(statusStarting.open)"></i>Select Language<i class="fa" ng-class="arrowLeftDirection(statusStarting.open)"></i></b></h2>
+								</div>
+							</md-toolbar>
 						</accordion-heading>
 						<section>
 							<div layout="row">
-								<div flex class="test" ng-class="borderOrNoBorder(0)" ng-click="setSelectedStartingLanguage(0)">
-									<a href="" ui-sref="home">
-										<span id="logoForJava" class="center"></span>
-										</br><span class="blackText">Java</span>
-									</a>
-								</div>
-								<div flex class="test" ng-class="borderOrNoBorder(1)" ng-click="setSelectedStartingLanguage(1)">
-									<a href="" ui-sref="home">
-										<span id="logoForPython" class="center"></span>
-										</br><span class="blackText">Python</span>
-									</a>
-								</div>
-								<div flex class="test" ng-class="borderOrNoBorder(2)" ng-click="setSelectedStartingLanguage(2)">
-									<a href="" ui-sref="home">
-										<span id="logoForMathML" class="center"></span>
-										</br><span class="blackText">MathML</span>
-									</a>
-								</div>
-								<div flex class="test" ng-class="borderOrNoBorder(3)" ng-click="setSelectedStartingLanguage(3)">
-									<a href="" ui-sref="home">
-										<span id="logoForRegMath" class="center"></span>
-										</br><span class="blackText">Regular Math</span>
-									</a>
-								</div>
-							</div>
-							<div layout="row">
-								<div flex class="test" ng-class="borderOrNoBorder(4)" ng-click="setSelectedStartingLanguage(4)">
-									<a href="" ui-sref="home">
-										<span id="logoForCSharp" class="center"></span>
-										</br><span class="blackText">C#</span>
-									</a>
-								</div>
-								<div flex class="test" ng-class="borderOrNoBorder(5)" ng-click="setSelectedStartingLanguage(5)">
-									<a href="" ui-sref="home">
-										<span id="logoForCPlusPlus" class="center"></span>
-										</br><span class="blackText">C++</span>
-									</a>
-								</div>
-								<div flex class="test" ng-class="borderOrNoBorder(6)" ng-click="setSelectedStartingLanguage(6)">
-									<a href="" ui-sref="home">
-										<span id="logoForC" class="center"></span>
-										</br><span class="blackText">C</span>
-									</a>
-								</div>
-								<div flex class="test" ng-class="borderOrNoBorder(7)" ng-click="setSelectedStartingLanguage(7)">
-								<a href="" ui-sref="home"><span id="logoForLaTex" class="center"></span>
-								</br><span class="blackText">Latex</span></a>
-								</div>
-							</div>
-							<div layout="row">
-								<div flex class="test" ng-class="borderOrNoBorder(8)" ng-click="setSelectedStartingLanguage(8)">
-								<a href="" ui-sref="home"><span id="logoForBrainFuck" class="center"></span>
-								</br><span class="blackText">BrainFuck</span></a>
-								</div>
 								<div flex>
-								</div>
-								<div flex>
-								</div>
-								<div flex>
+									<div flex layout="column" style="height: 300px; overflow-x: scroll; overflow-y: scroll;">
+										<div flex layout="row" class="center" style="width: 700px; padding: 2px;">
+											<div flex class="test" ng-class="borderOrNoBorder('s', 0)" ng-click="setSelectedLanguage('s', 0)" title="Java">
+												<a href="" ui-sref="home">
+													<span id="logoForJava" class="center" title="Java"></span>
+												</a>
+											</div>
+											<div flex class="test" ng-class="borderOrNoBorder('s', 1)" ng-click="setSelectedLanguage('s', 1)" title="Python">
+												<a href="" ui-sref="home">
+													<span id="logoForPython" class="center" title="Python"></span>
+												</a>
+											</div>
+											<div flex class="test" ng-class="borderOrNoBorder('s', 2)" ng-click="setSelectedLanguage('s', 2)" title="MathML">
+												<a href="" ui-sref="home">
+													<span id="logoForMathML" class="center" title="MathML"></span>
+												</a>
+											</div>
+											<div flex class="test" ng-class="borderOrNoBorder('s', 3)" ng-click="setSelectedLanguage('s', 3)" title="Regular Math">
+												<a href="" ui-sref="home">
+													<span id="logoForRegMath" class="center" title="Regular Math"></span>
+												</a>
+											</div>
+										</div>
+										<div flex layout="row" class="center" style="width: 700px; padding: 2px;">
+											<div flex class="test" ng-class="borderOrNoBorder('s', 4)" ng-click="setSelectedLanguage('s', 4)" title="C#">
+												<a href="" ui-sref="home">
+													<span id="logoForCSharp" class="center" title="C#"></span>
+												</a>
+											</div>
+											<div flex class="test" ng-class="borderOrNoBorder('s', 5)" ng-click="setSelectedLanguage('s', 5)" title="C++">
+												<a href="" ui-sref="home">
+													<span id="logoForCPlusPlus" class="center" title="C++"></span>
+												</a>
+											</div>
+											<div flex class="test" ng-class="borderOrNoBorder('s', 6)" ng-click="setSelectedLanguage('s', 6)" title="C">
+												<a href="" ui-sref="home">
+													<span id="logoForC" class="center" title="C"></span>
+												</a>
+											</div>
+											<div flex class="test" ng-class="borderOrNoBorder('s', 7)" ng-click="setSelectedLanguage('s', 7)" title="LaTex">
+												<a href="" ui-sref="home">
+													<span id="logoForLaTex" class="center" title="LaTex"></span>
+												</a>
+											</div>
+										</div>
+										<div flex layout="row" class="center" style="width: 700px; padding: 2px;">
+											<div flex class="test" ng-class="borderOrNoBorder('s', 8)" ng-click="setSelectedLanguage('s', 8)" title="BrainFuck">
+												<a href="" ui-sref="home">
+													<span id="logoForBrainFuck" class="center" title="BrainFuck"></span>
+												</a>
+											</div>
+											<div flex>
+											</div>
+											<div flex>
+											</div>
+											<div flex>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</section>
 					</accordion-group>
 				</accordion>
-				<div layout="row">
+				<div layout="row" ng-show="langaugeSelected('s') && !statusStarting.open">
 					<div flex>
-					<h1 id="header-home"><b>Language Selected: </b>{{startingLanguage}}</h1>
-					</div>
-				</div>
-				<div layout="row">
-					<div flex>
-					(For conversion page only)
+						<h3 id="header-home"><span class="blackText">Language Selected:</span></h3>
+						<span id="{{startingLanguageLogo}}" class="center" title="{{startingLanguage}}"></span>
+						<span class="blackText"><b>{{startingLanguage}}</b></span>
+						</br><md-button class="md-primary md-hue-1" ng-click="clearAll()">CLEAR</md-button>
 					</div>
 				</div>
 				<div layout="row">
 					<div flex>
 					============================</br>
 					Input</br>
-					<span class="noteBody whitesmokeText center"  placeholder="TEXT" summernote airMode readonly="true" ng-model="editform.body"></span>
+					<input class="noteBody whitesmokeText center" type="text" name="firstname" ng-disabled="!langaugeSelected('s')">
 					</div>
 				</div>
 				<div layout="row">
@@ -104,11 +107,95 @@
 					<md-button class="md-primary md-hue-1">Convert</md-button>
 					</div>
 				</div>
+				<accordion close-others="oneAtATime" class="burlywood-background">
+					<accordion-group heading="Select a Language" is-open="getStatus('c')" panel-class="panel-alert" layout-align="center center">
+						<accordion-heading>
+							<md-toolbar class="burlywood-background" ng-click="setStatus('c')">
+								<div class="md-toolbar-tools" layout-align="center center">
+									<h2 class="md-flex"><b><i class="fa" ng-class="arrowRightDirection(statusConversion.open)"></i>Select Language<i class="fa" ng-class="arrowLeftDirection(statusConversion.open)"></i></b></h2>
+								</div>
+							</md-toolbar>
+						</accordion-heading>
+						<section>
+							<div layout="row">
+								<div flex>
+									<div flex layout="column" style="height: 300px; overflow-x: scroll; overflow-y: scroll;">
+										<div flex layout="row" class="center" style="width: 700px; padding: 2px;">
+											<div flex class="test" ng-class="borderOrNoBorder('c', 0)" ng-click="setSelectedLanguage('c', 0)" title="Java">
+												<a href="" ui-sref="home">
+													<span id="logoForJava" class="center" title="Java"></span>
+												</a>
+											</div>
+											<div flex class="test" ng-class="borderOrNoBorder('c', 1)" ng-click="setSelectedLanguage('c', 1)" title="Python">
+												<a href="" ui-sref="home">
+													<span id="logoForPython" class="center" title="Python"></span>
+												</a>
+											</div>
+											<div flex class="test" ng-class="borderOrNoBorder('c', 2)" ng-click="setSelectedLanguage('c', 2)" title="MathML">
+												<a href="" ui-sref="home">
+													<span id="logoForMathML" class="center" title="MathML"></span>
+												</a>
+											</div>
+											<div flex class="test" ng-class="borderOrNoBorder('c', 3)" ng-click="setSelectedLanguage('c', 3)" title="Regular Math">
+												<a href="" ui-sref="home">
+													<span id="logoForRegMath" class="center" title="Regular Math"></span>
+												</a>
+											</div>
+										</div>
+										<div flex layout="row" class="center" style="width: 700px; padding: 2px;">
+											<div flex class="test" ng-class="borderOrNoBorder('c', 4)" ng-click="setSelectedLanguage('c', 4)" title="C#">
+												<a href="" ui-sref="home">
+													<span id="logoForCSharp" class="center" title="C#"></span>
+												</a>
+											</div>
+											<div flex class="test" ng-class="borderOrNoBorder('c', 5)" ng-click="setSelectedLanguage('c', 5)" title="C++">
+												<a href="" ui-sref="home">
+													<span id="logoForCPlusPlus" class="center" title="C++"></span>
+												</a>
+											</div>
+											<div flex class="test" ng-class="borderOrNoBorder('c', 6)" ng-click="setSelectedLanguage('c', 6)" title="C">
+												<a href="" ui-sref="home">
+													<span id="logoForC" class="center" title="C"></span>
+												</a>
+											</div>
+											<div flex class="test" ng-class="borderOrNoBorder('c', 7)" ng-click="setSelectedLanguage('c', 7)" title="LaTex">
+												<a href="" ui-sref="home">
+													<span id="logoForLaTex" class="center" title="LaTex"></span>
+												</a>
+											</div>
+										</div>
+										<div flex layout="row" class="center" style="width: 700px; padding: 2px;">
+											<div flex class="test" ng-class="borderOrNoBorder('c', 8)" ng-click="setSelectedLanguage('c', 8)" title="BrainFuck">
+												<a href="" ui-sref="home">
+													<span id="logoForBrainFuck" class="center" title="BrainFuck"></span>
+												</a>
+											</div>
+											<div flex>
+											</div>
+											<div flex>
+											</div>
+											<div flex>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+					</accordion-group>
+				</accordion>
+				<div layout="row" ng-show="langaugeSelected('c') && !statusConversion.open">
+					<div flex>
+						<h3 id="header-home"><span class="blackText">Language Selected:</span></h3>
+						<span id="{{conversionLanguageLogo}}" class="center" title="{{conversionLanguage}}"></span>
+						<span class="blackText"><b>{{conversionLanguage}}</b></span>
+						</br><md-button class="md-primary md-hue-1" ng-click="clearAll()">CLEAR</md-button>
+					</div>
+				</div>
 				<div layout="row">
 					<div flex>
-					============================</br>
-					Output</br>
-					(Some Input Field)
+						============================</br>
+						Output</br>
+						<input class="noteBody whitesmokeText center" type="text" name="firstname" ng-disabled="true">
 					</div>
 				</div>
 			</div>
