@@ -25,25 +25,39 @@ var home = function ($scope, $state, $stateParams, currUser) {
 	$scope.conversion = {
 		conversionFrom: "",
 		input: "",
+		mathFormula: "",
 		conversionTo: "",
 		result: ""
 	}
+	
+	$scope.language = [
+		{id: 0, name: 'Java', imageID: 'logoForJava'},
+		{id: 1, name: 'Python', imageID: 'logoForPython'},
+		{id: 2, name: 'MathML', imageID: 'logoForMathML'},
+		{id: 3, name: 'Regular Math', imageID: 'logoForRegMath'},
+		{id: 4, name: 'C#', imageID: 'logoForCSharp'},
+		{id: 5, name: 'C++', imageID: 'logoForCPlusPlus'},
+		{id: 6, name: 'C', imageID: 'logoForC'},
+		{id: 7, name: 'LaTex', imageID: 'logoForLaTex'},
+		{id: 8, name: 'BrainFuck', imageID: 'logoForBrainFuck'}
+	];
+	
+	var isLanguageSelected = [
+		{id: 0, name: 'Java', imageID: 'logoForJava', borderStart: false, borderConvert: false},
+		{id: 1, name: 'Python', imageID: 'logoForPython', borderStart: false, borderConvert: false},
+		{id: 2, name: 'MathML', imageID: 'logoForMathML', borderStart: false, borderConvert: false},
+		{id: 3, name: 'Regular Math', imageID: 'logoForRegMath', borderStart: false, borderConvert: false},
+		{id: 4, name: 'C#', imageID: 'logoForCSharp', borderStart: false, borderConvert: false},
+		{id: 5, name: 'C++', imageID: 'logoForCPlusPlus', borderStart: false, borderConvert: false},
+		{id: 6, name: 'C', imageID: 'logoForC', borderStart: false, borderConvert: false},
+		{id: 7, name: 'LaTex', imageID: 'logoForLaTex', borderStart: false, borderConvert: false},
+		{id: 8, name: 'BrainFuck', imageID: 'logoForBrainFuck', borderStart: false, borderConvert: false}
+	];
 	
 	$scope.statusStarting = {open: true};
 	var lastIndexStart = -1;
 	$scope.startingLanguage = "Select a Language";
 	$scope.startingLanguageLogo = "";
-	var isStartingLanguageSelected = [
-		{id: 0, name: 'Java', imageID: 'logoForJava', border: false},
-		{id: 1, name: 'Python', imageID: 'logoForPython', border: false},
-		{id: 2, name: 'MathML', imageID: 'logoForMathML', border: false},
-		{id: 3, name: 'Regular Math', imageID: 'logoForRegMath', border: false},
-		{id: 4, name: 'C#', imageID: 'logoForCSharp', border: false},
-		{id: 5, name: 'C++', imageID: 'logoForCPlusPlus', border: false},
-		{id: 6, name: 'C', imageID: 'logoForC', border: false},
-		{id: 7, name: 'LaTex', imageID: 'logoForLaTex', border: false},
-		{id: 8, name: 'BrainFuck', imageID: 'logoForBrainFuck', border: false}
-	];
 	
 	var startingLangaugeSelected = function() {
 		if ($scope.startingLanguageLogo === "") {
@@ -62,7 +76,7 @@ var home = function ($scope, $state, $stateParams, currUser) {
 			return '';
 		}
 		
-		if (isStartingLanguageSelected[languageID].border) {
+		if (isLanguageSelected[languageID].borderStarting) {
 			return 'languageSelectBorder';
 		}
 		
@@ -71,18 +85,18 @@ var home = function ($scope, $state, $stateParams, currUser) {
 	
 	var setSelectedStartingLanguage = function(languageID) {
 		if (languageID < 0 && languageID > 8) {
-			isStartingLanguageSelected[lastIndexStart].border = false;
+			isLanguageSelected[lastIndexStart].borderStart = false;
 			$scope.startingLanguageLogo = "";
 		}
 		
 		if (lastIndexStart >= 0 && lastIndexStart <= 8) {
-			isStartingLanguageSelected[lastIndexStart].border = false;
+			isLanguageSelected[lastIndexStart].borderStart = false;
 		}
 		
-		$scope.startingLanguage = isStartingLanguageSelected[languageID].name;
-		isStartingLanguageSelected[languageID].border = true;
-		$scope.startingLanguageLogo = isStartingLanguageSelected[languageID].imageID;
-		lastIndexStart = isStartingLanguageSelected[languageID].id;
+		$scope.startingLanguage = isLanguageSelected[languageID].name;
+		isLanguageSelected[languageID].borderStart = true;
+		$scope.startingLanguageLogo = isLanguageSelected[languageID].imageID;
+		lastIndexStart = isLanguageSelected[languageID].id;
 		$scope.conversion.conversionFrom = $scope.startingLanguage;
 		$scope.statusStarting.open = false;
 	};
@@ -91,17 +105,6 @@ var home = function ($scope, $state, $stateParams, currUser) {
 	var lastIndexConversion = -1;
 	$scope.conversionLanguage = "Select a Language";
 	$scope.conversionLanguageLogo = "";
-	var isConversionLanguageSelected = [
-		{id: 0, name: 'Java', imageID: 'logoForJava', border: false},
-		{id: 1, name: 'Python', imageID: 'logoForPython', border: false},
-		{id: 2, name: 'MathML', imageID: 'logoForMathML', border: false},
-		{id: 3, name: 'Regular Math', imageID: 'logoForRegMath', border: false},
-		{id: 4, name: 'C#', imageID: 'logoForCSharp', border: false},
-		{id: 5, name: 'C++', imageID: 'logoForCPlusPlus', border: false},
-		{id: 6, name: 'C', imageID: 'logoForC', border: false},
-		{id: 7, name: 'LaTex', imageID: 'logoForLaTex', border: false},
-		{id: 8, name: 'BrainFuck', imageID: 'logoForBrainFuck', border: false}
-	];
 	
 	var setConversionStatus = function() {
 		$scope.statusConversion.open = !($scope.statusConversion.open);
@@ -120,7 +123,7 @@ var home = function ($scope, $state, $stateParams, currUser) {
 			return '';
 		}
 		
-		if (isConversionLanguageSelected[languageID].border) {
+		if (isLanguageSelected[languageID].borderConvert) {
 			return 'languageSelectBorder';
 		}
 		
@@ -129,30 +132,71 @@ var home = function ($scope, $state, $stateParams, currUser) {
 	
 	var setSelectedConversionLanguage = function(languageID) {
 		if (languageID < 0 && languageID > 8) {
-			isConversionLanguageSelected[lastIndexConversion].border = false;
+			isLanguageSelected[lastIndexConversion].borderConvert = false;
 			$scope.conversionLanguageLogo = "";
 		}
 		
 		if (lastIndexConversion >= 0 && lastIndexConversion <= 8) {
-			isConversionLanguageSelected[lastIndexConversion].border = false;
+			isLanguageSelected[lastIndexConversion].borderConvert = false;
 		}
 		
-		$scope.conversionLanguage = isConversionLanguageSelected[languageID].name;
-		isConversionLanguageSelected[languageID].border = true;
-		$scope.conversionLanguageLogo = isConversionLanguageSelected[languageID].imageID;
-		lastIndexConversion = isConversionLanguageSelected[languageID].id;
+		$scope.conversionLanguage = isLanguageSelected[languageID].name;
+		isLanguageSelected[languageID].borderConvert = true;
+		$scope.conversionLanguageLogo = isLanguageSelected[languageID].imageID;
+		lastIndexConversion = isLanguageSelected[languageID].id;
 		$scope.conversion.conversionTo = $scope.conversionLanguage;
 		$scope.statusConversion.open = false;
 	};
 	
+	var clearLanguageStart = function() {
+		if (lastIndexStart >= 0 &&  lastIndexStart <= 8) {
+			isLanguageSelected[lastIndexStart].borderStart = false;
+			lastIndexStart = -1;
+		}
+		
+		$scope.startingLanguageLogo = "";
+		$scope.startingLanguage = "Select a Language";
+		$scope.conversion.conversionFrom = "";
+		$scope.statusStarting.open = true;
+	}
+	
+	var clearLanguageConversion = function() {
+		
+		if (lastIndexConversion >= 0 &&  lastIndexConversion <= 8) {
+			isLanguageSelected[lastIndexConversion].borderConvert = false;
+			lastIndexConversion= -1;
+		}
+		
+		$scope.conversionLanguageLogo = "";
+		$scope.conversionLanguage = "Select a Language";
+		$scope.conversion.conversionTo = "";
+		$scope.statusConversion.open = true;
+	}
+	
+	$scope.clearLanguage = function(symbol) {
+		if (symbol === 's') {
+			clearLanguageStart();
+			$scope.conversion.input = "";
+		} else if (symbol === 'c') {
+			clearLanguageConversion();
+			$scope.conversion.result = "";
+		} else if (symbol === 'a') {
+			clearLanguageStart();
+			clearLanguageConversion();
+			$scope.conversion.input = "";
+			$scope.conversion.mathFormula = "";
+			$scope.conversion.result = "";
+		}
+	}
+	
 	$scope.clearAll = function() {
 		if (lastIndexStart >= 0 &&  lastIndexStart <= 8) {
-			isStartingLanguageSelected[lastIndexStart].border = false;
+			isStartingLanguageSelected[lastIndexStart].borderStart = false;
 			lastIndexStart = -1;
 		}
 		
 		if (lastIndexConversion >= 0 &&  lastIndexConversion <= 8) {
-			isConversionLanguageSelected[lastIndexConversion].border = false;
+			isLanguageSelected[lastIndexConversion].borderConvert = false;
 			lastIndexConversion= -1;
 		}
 		
@@ -165,6 +209,7 @@ var home = function ($scope, $state, $stateParams, currUser) {
 		$scope.conversion.input = "";
 		$scope.conversion.result = "";
 		$scope.statusStarting.open = true;
+		$scope.statusConversion.open = true;
 	}
 	
 	$scope.langaugeSelected = function(symbol) {
@@ -208,7 +253,6 @@ var home = function ($scope, $state, $stateParams, currUser) {
 	}
 	
 	$scope.arrowLeftDirection = function(open) {
-		console.log(open);
 		if (open) {
 			return 'fa-arrow-down';
 		}

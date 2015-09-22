@@ -5,12 +5,7 @@
 			<div class="whitesmokeText">
 				<h1 id="header-home"><b>Welcome, </b>{{currUser.id}}</h1>
 			</div>
-			<div layout="column" class="whitesmokeText">
-				<div layout="row">
-					<div flex>
-					(For home page only)
-					</div>
-				</div>				
+			<div layout="column" class="whitesmokeText">			
 				<accordion close-others="oneAtATime" class="burlywood-background">
 					<accordion-group is-open="getStatus('s')" heading="Select a Language" panel-class="panel-alert" layout-align="center center">
 						<accordion-heading>
@@ -22,8 +17,8 @@
 						</accordion-heading>
 						<section>
 							<div layout="row">
-								<div flex>
-									<div flex layout="column" style="height: 300px; overflow-x: scroll; overflow-y: scroll;">
+								<div flex style="height: 200px !important; overflow-x: scroll; overflow-y: scroll;">
+									<div flex layout="column">
 										<div flex layout="row" class="center" style="width: 700px; padding: 2px;">
 											<div flex class="test" ng-class="borderOrNoBorder('s', 0)" ng-click="setSelectedLanguage('s', 0)" title="Java">
 												<a href="" ui-sref="home">
@@ -92,21 +87,19 @@
 						<h3 id="header-home"><span class="blackText">Language Selected:</span></h3>
 						<span id="{{startingLanguageLogo}}" class="center" title="{{startingLanguage}}"></span>
 						<span class="blackText"><b>{{startingLanguage}}</b></span>
-						</br><md-button class="md-primary md-hue-1" ng-click="clearAll()">CLEAR</md-button>
+						</br><md-button class="md-primary md-hue-1" ng-click="clearLanguage('s')">SELECT DIFFERENT LANGUAGE</md-button>
 					</div>
 				</div>
 				<div layout="row">
-					<div flex>
-					============================</br>
-					Input</br>
-					<input class="noteBody whitesmokeText center" type="text" name="firstname" ng-disabled="!langaugeSelected('s')">
+					<div flex class="noteBody whitesmokeText center">
+						<!--<input class="noteBody whitesmokeText center" type="text" name="firstname" ng-disabled="!langaugeSelected('s')" ng-model="conversion.input">-->
+						<md-input-container flex>
+							<label style="color: blue;">Input Code</label>
+							<textarea ng-model="conversion.input" style="background-color: white;" columns="1" rows="10" md-maxlength="8000" ng-disabled="!langaugeSelected('s')"></textarea>
+						</md-input-container>
 					</div>
 				</div>
-				<div layout="row">
-					<div flex hide-sm>
-					<md-button class="md-primary md-hue-1">Convert</md-button>
-					</div>
-				</div>
+				<hr>
 				<accordion close-others="oneAtATime" class="burlywood-background">
 					<accordion-group heading="Select a Language" is-open="getStatus('c')" panel-class="panel-alert" layout-align="center center">
 						<accordion-heading>
@@ -118,8 +111,8 @@
 						</accordion-heading>
 						<section>
 							<div layout="row">
-								<div flex>
-									<div flex layout="column" style="height: 300px; overflow-x: scroll; overflow-y: scroll;">
+								<div flex style="height: 200px !important; overflow-x: scroll; overflow-y: scroll;">
+									<div flex layout="column">
 										<div flex layout="row" class="center" style="width: 700px; padding: 2px;">
 											<div flex class="test" ng-class="borderOrNoBorder('c', 0)" ng-click="setSelectedLanguage('c', 0)" title="Java">
 												<a href="" ui-sref="home">
@@ -188,19 +181,42 @@
 						<h3 id="header-home"><span class="blackText">Language Selected:</span></h3>
 						<span id="{{conversionLanguageLogo}}" class="center" title="{{conversionLanguage}}"></span>
 						<span class="blackText"><b>{{conversionLanguage}}</b></span>
-						</br><md-button class="md-primary md-hue-1" ng-click="clearAll()">CLEAR</md-button>
+						</br><md-button class="md-primary md-hue-1" ng-click="clearLanguage('c')">SELECT DIFFERENT LANGUAGE</md-button>
 					</div>
 				</div>
 				<div layout="row">
-					<div flex>
-						============================</br>
-						Output</br>
-						<input class="noteBody whitesmokeText center" type="text" name="firstname" ng-disabled="true">
+					<div flex class="noteBody whitesmokeText center">
+						<!--<input class="noteBody whitesmokeText center" type="text" name="firstname" ng-disabled="true">-->
+						<md-input-container flex>
+							<label style="color: red;">Formula</label>
+							<textarea ng-model="conversion.mathFormula" style="background-color: white; color: black;" columns="1" rows="2" ng-disabled="true"></textarea>
+						</md-input-container>
+						<md-input-container flex>
+							<label style="color: blue;">Output Code</label>
+							<textarea ng-model="conversion.input" style="background-color: white; color: black;" columns="1" rows="10" ng-disabled="true"><!-- Change to conversion.output --></textarea>
+						</md-input-container>
+					</div>
+				</div>
+				<hr>
+				<div layout="row">
+					<div flex hide-sm>
+					<md-button class="md-primary md-hue-1" ng-click="clearLanguage('a')">Convert</md-button>
 					</div>
 				</div>
 			</div>
 			<br />
-			<!--<div class="whitesmokeText">
+			<!--
+			<md-virtual-repeat-container id="horizontal-container" md-orient-horizontal>
+				<div md-virtual-repeat="aLanguage in language" class="repeated-item" flex>
+					<div ng-class="borderOrNoBorder('c', aLanguage.id)" ng-click="setSelectedLanguage('c', aLanguage.id)" title="aLanguage.name">
+						<a href="" ui-sref="home">
+							<span id="{{aLanguage.imageID}}" class="center" title="{{aLanguage.name}}"></span>
+						</a>
+					</div>
+				</div>
+			</md-virtual-repeat-container>
+			
+			<div class="whitesmokeText">
 				<h2><b>Add Note</b></h2>
 				<h3>Quickly create, edit, and save notes</h3>
 			</div>
