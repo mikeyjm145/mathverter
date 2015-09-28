@@ -257,7 +257,7 @@ var home = function ($scope, $state, $stateParams, currUser, parserForRegMath) {
 	}
 	
 	$scope.convert = function() {
-		var opening = "<math mode='display' xmlns='http://www.w3.org/1998/Math/MathML'>\n<mrow>";
+		var opening = "<math mode='display' xmlns='http://www.w3.org/TR/MathML'>\n<mrow>";
 		var closing = "</mrow>\n</math>";
 		if (lastIndexStart === -1 || lastIndexConversion === -1) {
 			return;
