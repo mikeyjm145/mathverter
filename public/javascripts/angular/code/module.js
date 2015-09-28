@@ -1,4 +1,4 @@
-var MathverterApp = angular.module('Mathverter',['ui.router', 'summernote', 'ngMaterial', 'ui.bootstrap', 'pegjs']);
+var MathverterApp = angular.module('Mathverter',['ui.router', 'summernote', 'ngMaterial', 'ui.bootstrap']);
 /**
  * Find way to install and use sha1.
  * HTTP get post delete: https://docs.angularjs.org/api/ng/service/$http
