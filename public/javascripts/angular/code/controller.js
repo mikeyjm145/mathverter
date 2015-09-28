@@ -20,9 +20,10 @@ var notepad = function ($scope, $state, currUser) {
     };
 };
 
-var home = function ($scope, $state, $stateParams, currUser, parserForRegMath) {
+var home = function ($scope, $state, $stateParams, currUser, parserForRegMath, backupParserForRegMath) {
 	$scope.currUser = currUser;
 	var testParser = parserForRegMath;
+	var backupTestParser = backupParserForRegMath;
 	$scope.conversion = {
 		conversionFrom: "",
 		input: "",
@@ -268,7 +269,12 @@ var home = function ($scope, $state, $stateParams, currUser, parserForRegMath) {
 			console.log($scope.conversion.result);
 		}
 		else if (lastIndexStart === 3 || lastIndexConversion === 2) {
-			$scope.conversion.result = opening + testParser.parse($scope.conversion.input) + closing;
+			if (checkBrowserSupport() === "supported") {
+				$scope.conversion.result = opening + testParser.parse($scope.conversion.input) + closing;
+			} else {
+				$scope.conversion.result = opening + backupTestParser.parse($scope.conversion.input) + closing;
+			}
+			
 			injectHTML('formulaDisplay', $scope.conversion.result);
 			console.log($scope.conversion.result);
 		}
@@ -1169,6 +1175,7 @@ MathverterApp.controller('Home', [
     '$stateParams',
 	'CurrUser',
 	'ParserForRegMath',
+	'BackupParserForRegMath',
     home
 ]);
 
