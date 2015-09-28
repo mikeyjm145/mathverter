@@ -1,4 +1,4 @@
-AirPadApp.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+MathverterApp.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 	$locationProvider.html5Mode(false);
 	$urlRouterProvider.when('/', '/home');
 	$urlRouterProvider.when('', '/home');

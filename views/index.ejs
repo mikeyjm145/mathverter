@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>AirPad</title>
+    <title>Mathverter</title>
 	
 	<!-- for FF, Chrome, Opera -->
 	<link rel="icon" type="image/png" href="/images/AirPadSmaller.png" sizes="16x16">
@@ -25,6 +25,10 @@
 	<link rel="stylesheet" href="/angular/angular-material.min.css">
     <link rel="stylesheet" href="/angular/angular-material-font.css">
 	<!-- Angular Material -->
+	
+	<!-- MathML CSS -->
+	<link rel="stylesheet" href="/mathml/mathmlMain.css">
+	<!-- MathML CSS -->
 	
     <!-- My CSS -->
     <link rel="stylesheet" href="/main.css">
@@ -56,10 +60,16 @@
     <script type="text/javascript" src="/angular/code/module.js"></script>
     <script type="text/javascript" src="/angular/code/filter.js"></script>
     <script type="text/javascript" src="/angular/code/factory.js"></script>
+	<script type="text/javascript" src="/angular/code/languageParserFactory.js"></script>
     <script type="text/javascript" src="/angular/code/controller.js"></script>
     <script type="text/javascript" src="/angular/code/config.js"></script>
 	<script type="text/javascript" src="/angular/code/values.js"></script>
 	<!-- Angular Scripts -->
+	
+	<!-- MathML Scripts -->
+	<script>window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"]}};</script>
+	<script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_HTMLorMML"></script>
+	<!-- MathML Scripts -->
 	
     <!-- My Scripts -->
     <script type="text/javascript" src="/simpleFunctions.js"></script>
@@ -67,7 +77,7 @@
 	
 </head>
 
-<body ng-app="AirPad" ng-controller="NotePad">
+<body ng-app="Mathverter" ng-controller="NotePad">
 	<span ng-init="GoToHome()"></span>
     <section id="wrapper">
         <!-- Sidebar -->
@@ -124,7 +134,7 @@
 				<section ui-view>
 					Content Area
 				</section>
-				<div layout="row" layout-align="center end">
+				<!--<div layout="row" layout-align="center end">
 					<div layout="column">
 						<div>I'm left.</div>
 						<div>I'm right.</div>
@@ -153,7 +163,7 @@
 							<div>I'm below.</div>
 						</div>
 					</div>
-				</div>
+				</div>-->
             </section>
         </section>
         <!-- /#page-content-wrapper -->

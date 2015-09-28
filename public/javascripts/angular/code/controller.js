@@ -20,8 +20,9 @@ var notepad = function ($scope, $state, currUser) {
     };
 };
 
-var home = function ($scope, $state, $stateParams, currUser) {
+var home = function ($scope, $state, $stateParams, currUser, parserForRegMath) {
 	$scope.currUser = currUser;
+	var testParser = parserForRegMath;
 	$scope.conversion = {
 		conversionFrom: "",
 		input: "",
@@ -249,6 +250,19 @@ var home = function ($scope, $state, $stateParams, currUser) {
 			setSelectedStartingLanguage(languageID);
 		} else if (symbol === 'c') {
 			setSelectedConversionLanguage(languageID);
+		}
+	}
+	
+	$scope.convert = function() {
+		var opening = "<math mode='display' xmlns='http://www.w3.org/1998/Math/MathML'>\n<mrow>";
+		var closing = "</mrow>\n</math>";
+		if (lastIndexStart === -1 || lastIndexConversion === -1) {
+			return;
+		}
+		else if (lastIndexStart === 3 || lastIndexConversion === 2) {
+			$scope.conversion.result = opening +testParser.parse($scope.conversion.input) + closing;
+			injectHTML('formulaDisplay', $scope.conversion.result);
+			console.log($scope.conversion.result);
 		}
 	}
 	
@@ -1134,22 +1148,23 @@ var signup = function ($scope, $state, $http) {
     };
 };
 
-AirPadApp.controller('NotePad', [
+MathverterApp.controller('NotePad', [
 	'$scope',
     '$state',
 	'CurrUser',
     notepad
 ]);
 
-AirPadApp.controller('Home', [
+MathverterApp.controller('Home', [
 	'$scope',
     '$state',
     '$stateParams',
 	'CurrUser',
+	'ParserForRegMath',
     home
 ]);
 
-AirPadApp.controller('ViewNotes', [
+MathverterApp.controller('ViewNotes', [
 	'$scope',
     '$state',
 	'$http',
@@ -1159,7 +1174,7 @@ AirPadApp.controller('ViewNotes', [
     viewnotes
 ]);
 
-AirPadApp.controller('ViewNote', [
+MathverterApp.controller('ViewNote', [
 	'$scope',
     '$state',
 	'$http',
@@ -1168,7 +1183,7 @@ AirPadApp.controller('ViewNote', [
     viewnote
 ]);
 
-AirPadApp.controller('ViewFavoriteNotes', [
+MathverterApp.controller('ViewFavoriteNotes', [
 	'$scope',
     '$state',
 	'$http',
@@ -1178,7 +1193,7 @@ AirPadApp.controller('ViewFavoriteNotes', [
     viewfavoritenotes
 ]);
 
-AirPadApp.controller('AddNote', [
+MathverterApp.controller('AddNote', [
 	'$scope',
     '$state',
     '$http',
@@ -1186,7 +1201,7 @@ AirPadApp.controller('AddNote', [
     addnote
 ]);
 
-AirPadApp.controller('EditNote', [
+MathverterApp.controller('EditNote', [
 	'$scope',
     '$state',
 	'$stateParams',
@@ -1195,7 +1210,7 @@ AirPadApp.controller('EditNote', [
     editnote
 ]);
 
-AirPadApp.controller('ViewDeletedNotes', [
+MathverterApp.controller('ViewDeletedNotes', [
 	'$scope',
     '$state',
 	'$http',
@@ -1205,7 +1220,7 @@ AirPadApp.controller('ViewDeletedNotes', [
     viewdeletednotes
 ]);
 
-AirPadApp.controller('LoginController', [
+MathverterApp.controller('LoginController', [
     '$scope',
     '$state',
     '$http',
@@ -1213,14 +1228,14 @@ AirPadApp.controller('LoginController', [
     login
 ]);
 
-AirPadApp.controller('SignupController', [
+MathverterApp.controller('SignupController', [
     '$scope',
     '$state',
     '$http',
     signup
 ]);
 
-AirPadApp.controller('ProfileController', [
+MathverterApp.controller('ProfileController', [
     '$scope',
     '$stateParams',
     '$state',

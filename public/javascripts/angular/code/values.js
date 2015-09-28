@@ -1,4 +1,4 @@
-AirPadApp.value('CurrUser', {
+MathverterApp.value('CurrUser', {
 	id: null,
 	name: null,
 	username: null,
@@ -14,7 +14,7 @@ AirPadApp.value('CurrUser', {
 	deleted: null
 });
 
-AirPadApp.value('InitialUser', {
+MathverterApp.value('InitialUser', {
 	id: null,
 	name: null,
 	username: null,

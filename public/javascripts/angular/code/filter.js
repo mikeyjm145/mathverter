@@ -1,4 +1,4 @@
-AirPadApp.filter('FindUsersByCredentials', function () {
+MathverterApp.filter('FindUsersByCredentials', function () {
     return function (username, password, users) {
         for (var i = 0; i < users.length; i++) {
             var user = users[i];

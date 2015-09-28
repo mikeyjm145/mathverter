@@ -1,4 +1,4 @@
-var AirPadApp = angular.module('AirPad',['ui.router', 'summernote', 'ngMaterial', 'ui.bootstrap']);
+var MathverterApp = angular.module('Mathverter',['ui.router', 'summernote', 'ngMaterial', 'ui.bootstrap', 'pegjs']);
 /**
  * Find way to install and use sha1.
  * HTTP get post delete: https://docs.angularjs.org/api/ng/service/$http

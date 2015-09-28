@@ -1,4 +1,4 @@
-AirPadApp.factory('OrigSummernoteConfig', [function () {
+MathverterApp.factory('OrigSummernoteConfig', [function () {
 	return {
         styleWithSpan: true,
         focus: true,
@@ -20,7 +20,7 @@ AirPadApp.factory('OrigSummernoteConfig', [function () {
     };
 }]);
 
-AirPadApp.factory('CustSummernoteConfig', [function () {
+MathverterApp.factory('CustSummernoteConfig', [function () {
 	return {
         styleWithSpan: true,
         focus: true,
