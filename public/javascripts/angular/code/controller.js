@@ -181,12 +181,14 @@ var home = function ($scope, $state, $stateParams, currUser, parserForRegMath) {
 		} else if (symbol === 'c') {
 			clearLanguageConversion();
 			$scope.conversion.result = "";
+			injectHTML('formulaDisplay', "");
 		} else if (symbol === 'a') {
 			clearLanguageStart();
 			clearLanguageConversion();
 			$scope.conversion.input = "";
 			$scope.conversion.mathFormula = "";
 			$scope.conversion.result = "";
+			injectHTML('formulaDisplay', "");
 		}
 	}
 	
@@ -211,6 +213,7 @@ var home = function ($scope, $state, $stateParams, currUser, parserForRegMath) {
 		$scope.conversion.result = "";
 		$scope.statusStarting.open = true;
 		$scope.statusConversion.open = true;
+		injectHTML('formulaDisplay', "");
 	}
 	
 	$scope.langaugeSelected = function(symbol) {
@@ -259,8 +262,13 @@ var home = function ($scope, $state, $stateParams, currUser, parserForRegMath) {
 		if (lastIndexStart === -1 || lastIndexConversion === -1) {
 			return;
 		}
+		else if (lastIndexStart === lastIndexConversion) {
+			$scope.conversion.result = $scope.conversion.input;
+			injectHTML('formulaDisplay', "Same language selected.");
+			console.log($scope.conversion.result);
+		}
 		else if (lastIndexStart === 3 || lastIndexConversion === 2) {
-			$scope.conversion.result = opening +testParser.parse($scope.conversion.input) + closing;
+			$scope.conversion.result = opening + testParser.parse($scope.conversion.input) + closing;
 			injectHTML('formulaDisplay', $scope.conversion.result);
 			console.log($scope.conversion.result);
 		}
