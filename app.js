@@ -10,6 +10,7 @@ var mongoose = require('mongoose');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var notes = require('./routes/notes');
+var mathConverter = require('./routes/mathConverter');
 
 //https://www.npmjs.com/package/sha1
 //https://thinkster.io/mean-stack-tutorial/
@@ -50,6 +51,7 @@ app.use(express.static(__dirname + '/model'));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/notes', notes);
+app.use('/convert', mathConverter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -62,9 +64,11 @@ app.use(function (req, res, next) {
 
 // development error handler
 // will print stacktrace
+var errorMessage;
 if (app.get('env') === 'development') {
     app.use(function (err, req, res, next) {
         res.status(err.status || 500);
+		errorMessage = err.message;
         res.render('error', {
             message: err.message,
             error: err

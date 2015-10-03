@@ -20,7 +20,7 @@ var notepad = function ($scope, $state, currUser) {
     };
 };
 
-var home = function ($scope, $state, $stateParams, currUser, parserForRegMath, backupParserForRegMath) {
+var home = function ($scope, $state, $stateParams, $http, $q, currUser, parserForRegMath, backupParserForRegMath) {
 	$scope.currUser = currUser;
 	var testParser = parserForRegMath;
 	var backupTestParser = backupParserForRegMath;
@@ -29,7 +29,7 @@ var home = function ($scope, $state, $stateParams, currUser, parserForRegMath, b
 		input: "",
 		mathFormula: "",
 		conversionTo: "",
-		result: ""
+		output: ""
 	}
 	
 	$scope.language = [
@@ -181,14 +181,14 @@ var home = function ($scope, $state, $stateParams, currUser, parserForRegMath, b
 			$scope.conversion.input = "";
 		} else if (symbol === 'c') {
 			clearLanguageConversion();
-			$scope.conversion.result = "";
+			$scope.conversion.output = "";
 			injectHTML('formulaDisplay', "");
 		} else if (symbol === 'a') {
 			clearLanguageStart();
 			clearLanguageConversion();
 			$scope.conversion.input = "";
 			$scope.conversion.mathFormula = "";
-			$scope.conversion.result = "";
+			$scope.conversion.output = "";
 			injectHTML('formulaDisplay', "");
 		}
 	}
@@ -211,7 +211,7 @@ var home = function ($scope, $state, $stateParams, currUser, parserForRegMath, b
 		$scope.conversion.conversionFrom = "";
 		$scope.conversion.conversionTo = "";
 		$scope.conversion.input = "";
-		$scope.conversion.result = "";
+		$scope.conversion.output = "";
 		$scope.statusStarting.open = true;
 		$scope.statusConversion.open = true;
 		injectHTML('formulaDisplay', "");
@@ -257,26 +257,67 @@ var home = function ($scope, $state, $stateParams, currUser, parserForRegMath, b
 		}
 	}
 	
+	function buildErrorMessage(e) {
+		return e.location !== undefined
+			? "Line " + e.location.start.line + ", column " + e.location.start.column + ": " + e.message
+			: e.message;
+	}
+	
+	var convertTo = function(conversion, input, supported) {
+		var defer = $q.defer();
+		$http.get('/convert/' + conversion, { params: { supported: supported, content: input } })
+			.then(function(result) {
+				function buildErrorMessage(e) {
+					return e.location !== undefined
+						? "Line " + e.location.start.line + ", column " + e.location.start.column + ": " + e.message
+						: e.message;
+				}
+				
+				if (result === undefined || result === null) {
+					$scope.conversion.output = "Something went wrong. Please try again with another formula.";
+					return;
+				}
+				var opening = "<math mode='display' xmlns='http://www.w3.org/TR/MathML'>\n<mrow>\n";
+				var closing = "</mrow>\n</math>";
+				
+				if (result.data.expected !== undefined) {
+					var errormessage = result.data;
+					$scope.conversion.output =
+						errormessage.name + ": "
+						+ errormessage.message
+						+ "\n\t Line "
+						+ errormessage.location.start.line
+						+ ", Column "
+						+ errormessage.location.start.column;
+					return;
+				}
+				
+				$scope.conversion.output = opening + result.data + closing;
+				injectHTML('formulaDisplay', $scope.conversion.output);
+			});
+	}
+	
 	$scope.convert = function() {
-		var opening = "<math mode='display' xmlns='http://www.w3.org/TR/MathML'>\n<mrow>";
-		var closing = "</mrow>\n</math>";
+		injectHTML('formulaDisplay', "");
+		
+		if ($scope.conversion.input === '') {
+			injectHTML('formulaDisplay', "Please insert proper input.");
+			return;
+		}
+		
 		if (lastIndexStart === -1 || lastIndexConversion === -1) {
 			return;
 		}
-		else if (lastIndexStart === lastIndexConversion) {
-			$scope.conversion.result = $scope.conversion.input;
+		
+		if (lastIndexStart === lastIndexConversion) {
+			$scope.conversion.output = $scope.conversion.input;
 			injectHTML('formulaDisplay', "Same language selected.");
-			console.log($scope.conversion.result);
-		}
-		else if (lastIndexStart === 3 || lastIndexConversion === 2) {
-			if (checkBrowserSupport() === "supported") {
-				$scope.conversion.result = opening + testParser.parse($scope.conversion.input) + closing;
-			} else {
-				$scope.conversion.result = opening + backupTestParser.parse($scope.conversion.input) + closing;
+		} else if (lastIndexStart === 3 || lastIndexConversion === 2){
+			try {
+				$scope.conversion.output = convertTo('convertFromRegMathToMathML', $scope.conversion.input, checkBrowserSupport()).value;
+			} catch(err) {
+				
 			}
-			
-			injectHTML('formulaDisplay', $scope.conversion.result);
-			console.log($scope.conversion.result);
 		}
 	}
 	
@@ -1173,6 +1214,8 @@ MathverterApp.controller('Home', [
 	'$scope',
     '$state',
     '$stateParams',
+	'$http',
+	'$q',
 	'CurrUser',
 	'ParserForRegMath',
 	'BackupParserForRegMath',
