@@ -22,8 +22,10 @@ var notepad = function ($scope, $state, currUser) {
 
 var home = function ($scope, $state, $stateParams, $http, $q, currUser, parserForRegMath, backupParserForRegMath) {
 	$scope.currUser = currUser;
-	var testParser = parserForRegMath;
-	var backupTestParser = backupParserForRegMath;
+	//var testParser = parserForRegMath;
+	//var backupTestParser = backupParserForRegMath;
+	var opening = "<math mode='display' xmlns='http://www.w3.org/TR/MathML'>\n<mrow>\n\n";
+	var closing = "</mrow>\n</math>";
 	$scope.conversion = {
 		conversionFrom: "",
 		input: "",
@@ -101,6 +103,12 @@ var home = function ($scope, $state, $stateParams, $http, $q, currUser, parserFo
 		lastIndexStart = isLanguageSelected[languageID].id;
 		$scope.conversion.conversionFrom = $scope.startingLanguage;
 		$scope.statusStarting.open = false;
+		
+		if (languageID === 2) {
+			$scope.conversion.input = opening + closing;
+		} else {
+			$scope.conversion.input = "";
+		}
 	};
 	
 	$scope.statusConversion = {open: true};
@@ -263,24 +271,34 @@ var home = function ($scope, $state, $stateParams, $http, $q, currUser, parserFo
 			: e.message;
 	}
 	
-	var convertTo = function(conversion, input, supported) {
-		var defer = $q.defer();
+	function update(converted, convertType) {
+		if (convertType === "2,3") {
+			if (converted.error) {
+				throw converted.result;
+			}
+			
+			$scope.conversion.output = converted.result;
+		} else if (convertType === "3,2") {
+			var opening = "<math mode='display' xmlns='http://www.w3.org/TR/MathML'>\n<mrow>\n";
+			var closing = "</mrow>\n</math>";
+			
+			if (converted.error) {
+				throw converted.result;
+			}
+			injectHTML('formulaDisplay', opening + converted.result + closing);
+			$scope.conversion.output = opening + converted.result + closing;
+		}
+	}
+	
+	var convertTo = function(conversion, input, supported, convertType) {
 		$http.get('/convert/' + conversion, { params: { supported: supported, content: input } })
 			.then(function(result) {
-				function buildErrorMessage(e) {
-					return e.location !== undefined
-						? "Line " + e.location.start.line + ", column " + e.location.start.column + ": " + e.message
-						: e.message;
-				}
-				
 				if (result === undefined || result === null) {
-					$scope.conversion.output = "Something went wrong. Please try again with another formula.";
-					return;
-				}
-				var opening = "<math mode='display' xmlns='http://www.w3.org/TR/MathML'>\n<mrow>\n";
-				var closing = "</mrow>\n</math>";
-				
-				if (result.data.expected !== undefined) {
+					update({
+						result: "Something went wrong. Please try again with another formula.",
+						error: true
+					}, convertType);
+				} else if (result.data.expected !== undefined) {
 					var errormessage = result.data;
 					$scope.conversion.output =
 						errormessage.name + ": "
@@ -289,12 +307,84 @@ var home = function ($scope, $state, $stateParams, $http, $q, currUser, parserFo
 						+ errormessage.location.start.line
 						+ ", Column "
 						+ errormessage.location.start.column;
+					
+					update({
+						result: errormessage,
+						error: true
+					}, convertType);
+				} else {					
+					update({
+						result: result.data,
+						error: false
+					}, convertType);
+				}
+			});
+	}
+	
+	function validate(xml) {
+		var xt = "";
+		var h3OK = 1;
+		function checkErrorXML(x) {
+			xt = "";
+			h3OK = 1;
+			checkXML(x);
+		}
+
+		function checkXML(n) {
+			var l;
+			var i;
+			var nam;
+			
+			nam = n.nodeName
+			if (nam == "h3") {
+				if (h3OK==0) {
 					return;
 				}
 				
-				$scope.conversion.output = opening + result.data + closing;
-				injectHTML('formulaDisplay', $scope.conversion.output);
-			});
+				h3OK = 0;
+			}
+			
+			if (nam == "#text") {
+				xt = xt + n.nodeValue + "\n"
+			}
+			
+			l = n.childNodes.length
+			for (i = 0; i < l; i++) {
+				checkXML(n.childNodes[i])
+			}
+		}
+
+		function validateXML() {
+			// code for IE
+			if (window.ActiveXObject) {
+				var xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+				xmlDoc.async=false;
+				xmlDoc.loadXML(xml);
+
+				if(xmlDoc.parseError.errorCode!=0) {
+					txt = "Error Code: " + xmlDoc.parseError.errorCode + "\n";
+					txt = txt + "Error Reason: " + xmlDoc.parseError.reason;
+					txt = txt + "Error Line: " + xmlDoc.parseError.line;
+				} else {
+					alert("No errors found");
+				}
+			}
+			// code for Mozilla, Firefox, Opera, etc.
+			else if (document.implementation && document.implementation.createDocument) {
+				var parser=new DOMParser();
+				var xmlDoc=parser.parseFromString(xml,"text/xml");
+				if (xmlDoc.getElementsByTagName("parsererror").length>0) {
+					checkErrorXML(xmlDoc.getElementsByTagName("parsererror")[0]);
+					return xt;
+				} else {
+					return 'isValid';
+				}
+			} else {
+				return 'Your browser cannot handle this script';
+			}
+		}
+		
+		return validateXML();
 	}
 	
 	$scope.convert = function() {
@@ -314,9 +404,25 @@ var home = function ($scope, $state, $stateParams, $http, $q, currUser, parserFo
 			injectHTML('formulaDisplay', "Same language selected.");
 		} else if (lastIndexStart === 3 || lastIndexConversion === 2){
 			try {
-				$scope.conversion.output = convertTo('convertFromRegMathToMathML', $scope.conversion.input, checkBrowserSupport()).value;
-			} catch(err) {
+				convertTo('convertFromRegMathToMathML', $scope.conversion.input, checkBrowserSupport(), "3,2");
 				
+			} catch(err) {
+				injectHTML('formulaDisplay', "");
+				$scope.conversion.output = err;
+			}
+		} else if (lastIndexStart === 2 || lastIndexConversion === 3){
+			var msg = validate($scope.conversion.input)
+			if (msg !== 'isValid') {
+				injectHTML('formulaDisplay', "");
+				$scope.conversion.output = msg;
+				return;
+			}
+			
+			try {
+				convertTo('convertFromMathMLToRegMath', $scope.conversion.input, checkBrowserSupport(), "2,3");
+			} catch(err) {
+				injectHTML('formulaDisplay', "");
+				$scope.conversion.output = err;
 			}
 		}
 	}

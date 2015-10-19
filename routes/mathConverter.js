@@ -15,4 +15,13 @@ router.get('/convertFromRegMathToMathML', function(req, res) {
 	res.send(conversionResult);
 });
 
+router.get('/convertFromMathMLToRegMath', function(req, res) {
+	var conversionResult;
+
+	conversionResult = mathvert(2, req.query.content);
+	console.log("MathML to Reg Math: " + conversionResult);
+	
+	res.send(conversionResult);
+});
+
 module.exports = router;
