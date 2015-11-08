@@ -47,6 +47,14 @@ function checkBrowserSupport() {
 	else { return "not supported"; }
 }
 
+function check() {
+    var browserSupport = checkBrowserSupport();
+		
+    if (browserSupport !== "supported") {
+        document.write('<link rel="stylesheet" href="/mathml/mathmlMain.css">');
+    }
+}
+
 function removeNote(index, notes, amount) {
 	var noteArray = notes.splice(index, amount);
 	return noteArray.length > 0;

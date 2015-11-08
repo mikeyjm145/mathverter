@@ -27,4 +27,4 @@ build/Release
 
 .vscode/launch.json
 .vscode/settings.json
-node_modules/mongoose/
+node_modules/

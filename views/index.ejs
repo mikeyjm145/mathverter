@@ -10,10 +10,6 @@
 	<!-- for IE -->
 	<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
 	<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
-	
-	<script>
-		window.history.forward(1);
-	</script>
 
     <!-- load bootstrap CSS -->
 	<link rel="stylesheet" href="/bootstrap/font-awesome-4.4.0/css/font-awesome.min.css">
@@ -25,10 +21,6 @@
 	<link rel="stylesheet" href="/angular/angular-material.min.css">
     <link rel="stylesheet" href="/angular/angular-material-font.css">
 	<!-- Angular Material -->
-	
-	<!-- MathML CSS -->
-	<link rel="stylesheet" href="/mathml/mathmlMain.css">
-	<!-- MathML CSS -->
 	
     <!-- My CSS -->
     <link rel="stylesheet" href="/main.css">
@@ -66,18 +58,26 @@
 	<script type="text/javascript" src="/angular/code/values.js"></script>
 	<!-- Angular Scripts -->
 	
+	<script>
+		window.history.forward(1);
+	</script>
+	
+	<!-- My Scripts -->
+    <script type="text/javascript" src="/simpleFunctions.js"></script>
+	<!-- My Scripts -->
+	
+	<!-- MathML CSS Fallback -->
+	<script>check()</script>
+	<!-- MathML CSS Fallback -->
+	
 	<!-- MathML Scripts -->
 	<script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_HTMLorMML"></script>
 	<script>window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"]}};</script>
 	<!-- MathML Scripts -->
-	
-    <!-- My Scripts -->
-    <script type="text/javascript" src="/simpleFunctions.js"></script>
-	<!-- My Scripts -->
-	
 </head>
 
 <body ng-app="Mathverter" ng-controller="NotePad">
+	
 	<span ng-init="GoToHome()"></span>
     <section id="wrapper">
         <!-- Sidebar -->
@@ -134,42 +134,9 @@
 				<section ui-view>
 					Content Area
 				</section>
-				<!--<div layout="row" layout-align="center end">
-					<div layout="column">
-						<div>I'm left.</div>
-						<div>I'm right.</div>
-					</div>
-					<div layout="column">
-						<div>I'm above.</div>
-						<div>I'm below.</div>
-					</div>
-				</div>
-				<div layout="row" layout-align="center end">
-					<div flex>
-						<div layout="column">
-							<div>I'm left.</div>
-							<div>I'm right.</div>
-						</div>
-					</div>
-					<div flex>
-						<div layout="column">
-							<div>I'm above.</div>
-							<div>I'm below.</div>
-						</div>
-					</div>
-					<div flex>
-						<div layout="column">
-							<div>I'm above.</div>
-							<div>I'm below.</div>
-						</div>
-					</div>
-				</div>-->
             </section>
         </section>
-        <!-- /#page-content-wrapper -->
-
+        <!-- Page Content -->
     </section>
-
-
 </body>
 </html>

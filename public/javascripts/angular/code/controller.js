@@ -3,6 +3,16 @@ var notepad = function ($scope, $state, currUser) {
 		return currUser.username;
 	};
 	
+	$scope.configureSettings = function() {
+		var browserSupport = checkBrowserSupport();
+		
+		if (browserSupport === "supported") {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	var setUserID = function () {
 		return currUser.id;
 	};

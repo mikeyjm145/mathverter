@@ -73,6 +73,7 @@
         margin-left: .5em;
         vertical-align: middle;
         border-top: solid thin;
+		content: "\221A";
     }
     msqrt:before, mroot:before {
         margin-left: -.5em;
