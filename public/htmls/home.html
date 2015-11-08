@@ -95,7 +95,7 @@
 						<md-input-container flex>
 							<span class="noteBody whitesmokeText center">Try me: a = (2 / (z - 4) + {x^{2^3}} + 1) + 5;</span>
 							<label style="color: blue;">Input Code</label>
-							<textarea ng-model="conversion.input" style="background-color: white;" columns="1" rows="10" md-maxlength="8000" ng-disabled="!langaugeSelected('s')"></textarea>
+							<textarea ng-model="conversion.input" style="background-color: white; overflow-y: scroll;" columns="1" rows="10" md-maxlength="8000" ng-disabled="!langaugeSelected('s')"></textarea>
 						</md-input-container>
 					</div>
 				</div>
@@ -194,7 +194,7 @@
 						<md-input-container flex>
 							<span id="formulaDisplay" class="noteBody whitesmokeText center"></span>
 							<label style="color: blue;">Output Code</label>
-							<textarea ng-model="conversion.output" style="background-color: white; color: black; overflow-y: scroll;" columns="1" rows="10" ng-disabled="false"></textarea>
+							<textarea ng-model="conversion.output" style="background-color: white; color: black; overflow-y: scroll;" columns="1" rows="10" ng-disabled="false" readonly></textarea>
 						</md-input-container>
 					</div>
 				</div>
