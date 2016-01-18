@@ -30,7 +30,7 @@ var notepad = function ($scope, $state, currUser) {
     };
 };
 
-var home = function ($scope, $state, $stateParams, $http, $q, currUser, parserForRegMath, backupParserForRegMath) {
+var home = function ($scope, $window, $state, $stateParams, $http, $q, imageCreator, currUser, parserForRegMath, backupParserForRegMath) {
 	$scope.currUser = currUser;
 	//var testParser = parserForRegMath;
 	//var backupTestParser = backupParserForRegMath;
@@ -295,8 +295,76 @@ var home = function ($scope, $state, $stateParams, $http, $q, currUser, parserFo
 			if (converted.error) {
 				throw converted.result;
 			}
-			injectHTML('formulaDisplay', opening + converted.result + closing);
 			$scope.conversion.output = opening + converted.result + closing;
+			injectHTML('formulaDisplay', $scope.conversion.output);
+			
+			var formulaDisplay = document.getElementById("formulaDisplay");
+			
+			/*$http.get('/convertToCanvas', { params: { element: formulaDisplay } }).then(function(result) {
+					var canvas = result.data;
+					var mathimage = imageCreator.createImage(canvas, $scope.conversion.output);
+					console.log(mathimage);
+					$scope.formulaImage = { src: mathimage.src, width: mathimage.width, height: mathimage.height };
+				});
+				html2canvas(formulaDisplay, {
+					onrendered: function(canvas) {
+						var mathimage = imageCreator.createImage(canvas, $scope.conversion.output);
+						console.log(mathimage);
+						$scope.formulaImage = { src: mathimage.src, width: mathimage.width, height: mathimage.height };
+					}
+				});*/
+            
+		} else if (convertType === "0,2") {
+			var opening = "<math mode='display' xmlns='http://www.w3.org/TR/MathML'>\n<mrow>\n";
+			var closing = "</mrow>\n</math>";
+			
+			if (converted.error) {
+				throw converted.result;
+			}
+			$scope.conversion.output = opening + converted.result.replace(",", "") + closing;
+			injectHTML('formulaDisplay', $scope.conversion.output);
+			
+			var formulaDisplay = document.getElementById("formulaDisplay");
+            var testcanvas = document.getElementById("test");
+            var ctx = testcanvas.getContext('2d');
+            ctx.clearRect(0,0,testcanvas.width,testcanvas.height);
+            var data = '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">'
+                + '<foreignObject width="100%" height="100%">'
+                + '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:30px; color: white; text-align: center;">'
+                + (formulaDisplay.innerHTML ||formulaDisplay.innerText)
+                + '</div></foreignObject></svg>';
+                
+            var DOMURL = window.URL || window.webkitURL || window;
+            var img = new Image();
+            var svg = new Blob([data], {type: 'image/svg+xml;charset=utf-8'});
+            var url = DOMURL.createObjectURL(svg);
+    
+            img.onload = function () {
+                ctx.drawImage(img, 0, 0);
+                DOMURL.revokeObjectURL(url);
+            }
+            
+            img.src = url;
+            
+			/*html2canvas(formulaDisplay, options);
+            
+			$http.get('/convertToCanvas', { params: { element: formulaDisplay } }).then(function(result) {
+					var canvas = result.data;
+					var mathimage = imageCreator.createImage(canvas, $scope.conversion.output);
+					console.log(mathimage);
+					$scope.formulaImage = { src: mathimage.src, width: mathimage.width, height: mathimage.height };
+				});
+            html2canvas(formulaDisplay, {
+                onrendered: function(canvas) {
+                    //var mathimage = imageCreator.createImage(canvas, $scope.conversion.output);
+                    //console.log(mathimage);
+                    testcanvas.appendChild(canvas);
+                    //$scope.formulaImage = { src: mathimage.src, width: mathimage.width, height: mathimage.height };
+                },
+                width: 300,
+                height:300
+            });*/
+            
 		}
 	}
 	
@@ -409,10 +477,10 @@ var home = function ($scope, $state, $stateParams, $http, $q, currUser, parserFo
 			return;
 		}
 		
-		if (lastIndexStart === lastIndexConversion) {
+		if (lastIndexStart == lastIndexConversion) {
 			$scope.conversion.output = $scope.conversion.input;
 			injectHTML('formulaDisplay', "Same language selected.");
-		} else if (lastIndexStart === 3 || lastIndexConversion === 2){
+		} else if (lastIndexStart === 3 && lastIndexConversion === 2){
 			try {
 				convertTo('convertFromRegMathToMathML', $scope.conversion.input, checkBrowserSupport(), "3,2");
 				
@@ -420,7 +488,7 @@ var home = function ($scope, $state, $stateParams, $http, $q, currUser, parserFo
 				injectHTML('formulaDisplay', "");
 				$scope.conversion.output = err;
 			}
-		} else if (lastIndexStart === 2 || lastIndexConversion === 3){
+		} else if (lastIndexStart === 2 && lastIndexConversion === 3){
 			var msg = validate($scope.conversion.input)
 			if (msg !== 'isValid') {
 				injectHTML('formulaDisplay', "");
@@ -434,7 +502,14 @@ var home = function ($scope, $state, $stateParams, $http, $q, currUser, parserFo
 				injectHTML('formulaDisplay', "");
 				$scope.conversion.output = err;
 			}
-		}
+		} else if (lastIndexStart === 0 && lastIndexConversion === 2){
+			try {
+				convertTo('convertFromJavaToMathML', $scope.conversion.input, checkBrowserSupport(), "0,2");
+			} catch(err) {
+				injectHTML('formulaDisplay', "");
+				$scope.conversion.output = err;
+			}
+        }
 	}
 	
 	$scope.arrowLeftDirection = function(open) {
@@ -1328,10 +1403,12 @@ MathverterApp.controller('NotePad', [
 
 MathverterApp.controller('Home', [
 	'$scope',
+	'$window',
     '$state',
     '$stateParams',
 	'$http',
 	'$q',
+	'ImageCreatorFactory',
 	'CurrUser',
 	'ParserForRegMath',
 	'BackupParserForRegMath',

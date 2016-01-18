@@ -189,11 +189,12 @@
 						<!--<input class="noteBody whitesmokeText center" type="text" name="firstname" ng-disabled="true">-->
 						<md-input-container flex>
 							<label style="color: red;">Formula</label>
-							<textarea ng-model="conversion.mathFormula" style="background-color: white; color: black;" columns="1" rows="2" ng-disabled="true"></textarea>
+							<textarea id="formula" ng-model="conversion.mathFormula" style="background-color: white; color: black;" columns="1" rows="2" ng-disabled="true"></textarea>
 						</md-input-container>
 						<md-input-container flex>
 							<span id="formulaDisplay" class="noteBody whitesmokeText center"></span>
-							<label style="color: blue;">Output Code</label>
+							<canvas id="test" class="noteBody whitesmokeText center"></canvas>
+							<label style="color: orange;">Output Code</label>
 							<textarea ng-model="conversion.output" style="background-color: white; color: black; overflow-y: scroll;" columns="1" rows="10" ng-disabled="false" readonly></textarea>
 						</md-input-container>
 					</div>

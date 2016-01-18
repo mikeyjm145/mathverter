@@ -1,16 +1,16 @@
 var express = require('express');
 var path = require('path');
-//var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var fileSystem = require('fs');
-//var pegjs = require('pegjs');
 var mongoose = require('mongoose');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var notes = require('./routes/notes');
 var mathConverter = require('./routes/mathConverter');
+var html2canvas = require('./node_modules/html2canvas/dist/html2canvas.js');
+var mathFormulaToImage = require('./routes/mathFormulaImageConversion');
 
 //https://www.npmjs.com/package/sha1
 //https://thinkster.io/mean-stack-tutorial/
