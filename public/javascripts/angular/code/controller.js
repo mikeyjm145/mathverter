@@ -281,90 +281,79 @@ var home = function ($scope, $window, $state, $stateParams, $http, $q, imageCrea
 			: e.message;
 	}
 	
+	function createImage(text) {
+		var testcanvas = document.getElementById("test");
+		var ctx = testcanvas.getContext('2d');
+		ctx.clearRect(0,0,testcanvas.width,testcanvas.height);
+		var data = '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">'
+			+ '<foreignObject width="100%" height="100%">'
+			+ '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:30px; color: white; text-align: center;">'
+			+ text
+			+ '</div></foreignObject></svg>';
+			
+		var DOMURL = window.URL || window.webkitURL || window;
+		var img = new Image();
+		var svg = new Blob([data], {type: 'image/svg+xml;charset=utf-8'});
+		var url = DOMURL.createObjectURL(svg);
+
+		img.onload = function () {
+			ctx.drawImage(img, 0, 0);
+			DOMURL.revokeObjectURL(url);
+		}
+		
+		img.src = url;
+	}
+	
+	function displayResult_MathML(converted) {
+		var opening = "<math mode='display' xmlns='http://www.w3.org/TR/MathML'>\n<mrow>\n";
+		var closing = "</mrow>\n</math>";
+		
+		var what = Object.prototype.toString;
+		
+		var commas = new RegExp(",", 'g');
+		$scope.conversion.output = opening + converted.result.replace(commas, "") + closing;
+		injectHTML('formulaDisplay', $scope.conversion.output);
+		
+		var formulaDisplay = document.getElementById("formulaDisplay");
+		createImage((formulaDisplay.innerHTML ||formulaDisplay.innerText));
+	}
+	
+	function displayResult(converted) {
+		$scope.conversion.output = converted.result;
+		injectHTML('formulaDisplay', $scope.conversion.output);
+		
+		var formulaDisplay = document.getElementById("formulaDisplay");
+		createImage((formulaDisplay.innerHTML ||formulaDisplay.innerText));
+	}
+	
 	function update(converted, convertType) {
+		var what = Object.prototype.toString;
 		if (convertType === "2,3") {
 			if (converted.error) {
 				throw converted.result;
 			}
 			
-			$scope.conversion.output = converted.result;
-		} else if (convertType === "3,2") {
-			var opening = "<math mode='display' xmlns='http://www.w3.org/TR/MathML'>\n<mrow>\n";
-			var closing = "</mrow>\n</math>";
+			displayResult(converted);
 			
-			if (converted.error) {
+		} else if (convertType === "3,2") {
+			typeCheck = what.call(converted.result);
+		
+			if (converted.error || typeCheck === "[object Array]") {
 				throw converted.result;
 			}
-			$scope.conversion.output = opening + converted.result + closing;
-			injectHTML('formulaDisplay', $scope.conversion.output);
 			
-			var formulaDisplay = document.getElementById("formulaDisplay");
-			
-			/*$http.get('/convertToCanvas', { params: { element: formulaDisplay } }).then(function(result) {
-					var canvas = result.data;
-					var mathimage = imageCreator.createImage(canvas, $scope.conversion.output);
-					console.log(mathimage);
-					$scope.formulaImage = { src: mathimage.src, width: mathimage.width, height: mathimage.height };
-				});
-				html2canvas(formulaDisplay, {
-					onrendered: function(canvas) {
-						var mathimage = imageCreator.createImage(canvas, $scope.conversion.output);
-						console.log(mathimage);
-						$scope.formulaImage = { src: mathimage.src, width: mathimage.width, height: mathimage.height };
-					}
-				});*/
+			displayResult_MathML(converted);
             
 		} else if (convertType === "0,2") {
-			var opening = "<math mode='display' xmlns='http://www.w3.org/TR/MathML'>\n<mrow>\n";
-			var closing = "</mrow>\n</math>";
-			
+			typeCheck = what.call(converted.result);
+		
 			if (converted.error) {
 				throw converted.result;
+			} else if (typeCheck === "[object Array]") {
+				throw  "Please enter valid Java code.";
 			}
-			$scope.conversion.output = opening + converted.result.replace(",", "") + closing;
-			injectHTML('formulaDisplay', $scope.conversion.output);
 			
-			var formulaDisplay = document.getElementById("formulaDisplay");
-            var testcanvas = document.getElementById("test");
-            var ctx = testcanvas.getContext('2d');
-            ctx.clearRect(0,0,testcanvas.width,testcanvas.height);
-            var data = '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">'
-                + '<foreignObject width="100%" height="100%">'
-                + '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:30px; color: white; text-align: center;">'
-                + (formulaDisplay.innerHTML ||formulaDisplay.innerText)
-                + '</div></foreignObject></svg>';
-                
-            var DOMURL = window.URL || window.webkitURL || window;
-            var img = new Image();
-            var svg = new Blob([data], {type: 'image/svg+xml;charset=utf-8'});
-            var url = DOMURL.createObjectURL(svg);
-    
-            img.onload = function () {
-                ctx.drawImage(img, 0, 0);
-                DOMURL.revokeObjectURL(url);
-            }
-            
-            img.src = url;
-            
-			/*html2canvas(formulaDisplay, options);
-            
-			$http.get('/convertToCanvas', { params: { element: formulaDisplay } }).then(function(result) {
-					var canvas = result.data;
-					var mathimage = imageCreator.createImage(canvas, $scope.conversion.output);
-					console.log(mathimage);
-					$scope.formulaImage = { src: mathimage.src, width: mathimage.width, height: mathimage.height };
-				});
-            html2canvas(formulaDisplay, {
-                onrendered: function(canvas) {
-                    //var mathimage = imageCreator.createImage(canvas, $scope.conversion.output);
-                    //console.log(mathimage);
-                    testcanvas.appendChild(canvas);
-                    //$scope.formulaImage = { src: mathimage.src, width: mathimage.width, height: mathimage.height };
-                },
-                width: 300,
-                height:300
-            });*/
-            
+			displayResult_MathML(converted);
 		}
 	}
 	
@@ -391,12 +380,18 @@ var home = function ($scope, $window, $state, $stateParams, $http, $q, imageCrea
 						error: true
 					}, convertType);
 				} else {					
-					update({
-						result: result.data,
-						error: false
-					}, convertType);
+					try {
+						update({
+							result: result.data,
+							error: false
+						}, convertType);
+					} catch (err){
+						$scope.conversion.output = err;
+					}
 				}
-			});
+			}).catch(function(err) {
+                $scope.conversion.output = "Something went wrong. Please try again with another formula.";
+            });
 	}
 	
 	function validate(xml) {
@@ -466,7 +461,9 @@ var home = function ($scope, $window, $state, $stateParams, $http, $q, imageCrea
 	}
 	
 	$scope.convert = function() {
+        $scope.conversion.output = "";
 		injectHTML('formulaDisplay', "");
+		createImage("");
 		
 		if ($scope.conversion.input === '') {
 			injectHTML('formulaDisplay', "Please insert proper input.");
