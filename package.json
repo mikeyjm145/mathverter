@@ -15,7 +15,7 @@
     "ejs": "~2.3.3",
     "express": "~4.13.1",
     "html2canvas": "^0.5.0-alpha2",
-    "mathxml": "0.2.3",
+    "mathxml": "0.2.7",
     "mongoose": "~4.1.7",
     "morgan": "~1.6.1"
   }
