@@ -310,7 +310,7 @@ var home = function ($scope, $window, $state, $stateParams, $http, $q, imageCrea
 		
 		var what = Object.prototype.toString;
 		
-		var commas = new RegExp(",", 'g');
+		var commas = /,/g;
 		$scope.conversion.output = opening + converted.result.replace(commas, "") + closing;
 		injectHTML('formulaDisplay', $scope.conversion.output);
 		
