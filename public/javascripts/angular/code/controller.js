@@ -323,7 +323,7 @@ var home = function ($scope, $window, $state, $stateParams, $http, $q, imageCrea
 		injectHTML('formulaDisplay', $scope.conversion.output);
 		
 		var formulaDisplay = document.getElementById("formulaDisplay");
-		createImage((formulaDisplay.innerHTML ||formulaDisplay.innerText));
+		createImage((formulaDisplay.innerHTML || formulaDisplay.innerText));
 	}
 	
 	function update(converted, convertType) {
@@ -354,12 +354,33 @@ var home = function ($scope, $window, $state, $stateParams, $http, $q, imageCrea
 			}
 			
 			displayResult_MathML(converted);
+		} else if (convertType === "0,3") {
+			typeCheck = what.call(converted.result);
+		
+			if (converted.error) {
+				throw converted.result;
+			} else if (typeCheck === "[object Array]") {
+				throw  "Please enter valid Java code.";
+			}
+			
+			displayResult(converted);
+		} else if (convertType === "3,0") {
+			typeCheck = what.call(converted.result);
+		
+			if (converted.error) {
+				throw converted.result;
+			} else if (typeCheck === "[object Array]") {
+				throw  "Please enter valid Java code.";
+			}
+			
+			displayResult(converted);
 		}
 	}
 	
 	var convertTo = function(conversion, input, supported, convertType) {
 		$http.get('/convert/' + conversion, { params: { supported: supported, content: input } })
 			.then(function(result) {
+                console.log(result);
 				if (result === undefined || result === null) {
 					update({
 						result: "Something went wrong. Please try again with another formula.",
@@ -502,6 +523,20 @@ var home = function ($scope, $window, $state, $stateParams, $http, $q, imageCrea
 		} else if (lastIndexStart === 0 && lastIndexConversion === 2){
 			try {
 				convertTo('convertFromJavaToMathML', $scope.conversion.input, checkBrowserSupport(), "0,2");
+			} catch(err) {
+				injectHTML('formulaDisplay', "");
+				$scope.conversion.output = err;
+			}
+        } else if (lastIndexStart === 0 && lastIndexConversion === 3){
+			try {
+				convertTo('convertFromJavaToMath', $scope.conversion.input, checkBrowserSupport(), "0,3");
+			} catch(err) {
+				injectHTML('formulaDisplay', "");
+				$scope.conversion.output = err;
+			}
+        } else if (lastIndexStart === 3 && lastIndexConversion === 0){
+			try {
+				convertTo('convertFromMathToJava', $scope.conversion.input, checkBrowserSupport(), "3,0");
 			} catch(err) {
 				injectHTML('formulaDisplay', "");
 				$scope.conversion.output = err;

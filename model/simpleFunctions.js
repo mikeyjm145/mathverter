@@ -10,26 +10,6 @@ function theDate(timeBehind) {
     return (pastDate.getMonth() + 1) + "/" + pastDate.getDate() + "/" + pastDate.getFullYear();
 }
 
-function getNoteByID(id, notes) {
-    if (notes === null) {
-        return;
-    }
-
-	var note = null;
-	if (notes.length === 0) {
-		return note;
-	}
-	
-    for (var i = 0; i < notes.length; i++) {
-        if ((id === notes[i]._id)) {
-            note = notes[i];
-            i = notes.length;
-        }
-    }
-
-    return note;
-}
-
 function injectHTML(elementID, text) {
 	document.getElementById(elementID).innerHTML = text;
 }
@@ -53,29 +33,4 @@ function check() {
     if (browserSupport !== "supported") {
         document.write('<link rel="stylesheet" href="/mathml/mathmlMain.css">');
     }
-}
-
-function removeNote(index, notes, amount) {
-	var noteArray = notes.splice(index, amount);
-	return noteArray.length > 0;
-}
-
-function getNoteIndexByID(id, notes) {
-    if (notes === null) {
-        return;
-    }
-
-	var noteIndex = -1;
-	if (notes.length === 0) {
-		return noteIndex;
-	}
-    var i = 0;
-    for (i = 0; i < notes.length; i++) {
-        if ((id === notes[i]._id)) {
-            noteIndex = i;
-            i = notes.length;
-        }
-    }
-
-    return noteIndex;
 }
